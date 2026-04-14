@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* Falls die Warnung in VSC nervt: Das liegt nur an der VSC-Erweiterung, 
+   der Browser versteht das dank Vite trotzdem einwandfrei. */
