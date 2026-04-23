@@ -1,11 +1,13 @@
+// src/App.jsx
 import { useState, useEffect } from 'react';
 import { translations } from './lib/translations';
 import Onboarding from './components/Onboarding';
 import PerfumeScenario from './components/PerfumeScenario';
 import NewsScenario from './components/NewsScenario';
 import FlightScenario from './components/FlightScenario';
-import RecipeScenario from './components/RecipeScenario';
+import DiscountScenario from './components/DiscountScenario';
 import DownloadScenario from './components/DownloadScenario';
+import MiniSurvey from './components/MiniSurvey';
 import SurveyScenario from './components/SurveyScenario';
 import ResultScreen from './components/ResultScreen';
 import InfoModal from './components/InfoModal';
@@ -16,22 +18,30 @@ export default function App() {
   const [showInfo, setShowInfo] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [scenarioGroups, setScenarioGroups] = useState({});
-  const [sessionData, setSessionData] = useState({ age: '', techSavvy: 3, decisions: {}, survey: {} });
+  const [sessionData, setSessionData] = useState({ age: '', techSavvy: 3, decisions: {}, miniSurveys: {}, finalSurvey: {} });
 
   const t = translations[lang];
 
-  const scenarioKeys = ['perfume', 'news', 'flight', 'recipe', 'download'];
-  const currentScenarioKey = step > 0 && step <= 5 ? scenarioKeys[step - 1] : null;
+  // Rezept-Szenario durch Discount-Szenario (Popup) ersetzt
+  const scenarioKeys = ['perfume', 'news', 'flight', 'discount', 'download'];
+  
+  let currentScenarioKey = null;
+  if (step === 1 || step === 2) currentScenarioKey = 'perfume';
+  if (step === 3 || step === 4) currentScenarioKey = 'news';
+  if (step === 5 || step === 6) currentScenarioKey = 'flight';
+  if (step === 7 || step === 8) currentScenarioKey = 'discount';
+  if (step === 9 || step === 10) currentScenarioKey = 'download';
 
   useEffect(() => {
-    const groups = ['A', 'B', 'B', 'A', 'B'].sort(() => Math.random() - 0.5);
-    setScenarioGroups({ 
-      perfume: groups[0], 
-      news: groups[1], 
-      flight: groups[2],
-      recipe: groups[3],
-      download: groups[4]
-    });
+    const options = ['A', 'B', 'C'];
+    const generateGroups = () => {
+      const groups = {};
+      scenarioKeys.forEach(key => {
+        groups[key] = options[Math.floor(Math.random() * options.length)];
+      });
+      return groups;
+    };
+    setScenarioGroups(generateGroups());
   }, []);
 
   const handleScenarioComplete = (name, wasManipulated) => {
@@ -42,16 +52,25 @@ export default function App() {
     setStep(prev => prev + 1);
   };
 
-  const handleSurveyComplete = (surveyData) => {
-    setSessionData(prev => ({ ...prev, survey: surveyData }));
+  const handleMiniSurveyComplete = (name, surveyData) => {
+    setSessionData(prev => ({
+      ...prev,
+      miniSurveys: { ...prev.miniSurveys, [name]: surveyData }
+    }));
+    setStep(prev => prev + 1);
+  };
+
+  const handleFinalSurveyComplete = (surveyData) => {
+    setSessionData(prev => ({ ...prev, finalSurvey: surveyData }));
     setStep(prev => prev + 1);
   };
 
   const toggleCurrentGroup = () => {
     if (!currentScenarioKey) return;
+    const cycle = { 'A': 'B', 'B': 'C', 'C': 'A' };
     setScenarioGroups(prev => ({
       ...prev,
-      [currentScenarioKey]: prev[currentScenarioKey] === 'A' ? 'B' : 'A'
+      [currentScenarioKey]: cycle[prev[currentScenarioKey]]
     }));
   };
 
@@ -87,13 +106,24 @@ export default function App() {
 
       <main className="max-w-[1400px] mx-auto py-10 px-4">
         {step === 0 && <Onboarding t={t} onNext={(d) => { setSessionData(prev => ({...prev, ...d})); setStep(1); }} />}
+        
         {step === 1 && <PerfumeScenario key="perfume" group={scenarioGroups.perfume} onComplete={(res) => handleScenarioComplete('perfume', res)} />}
-        {step === 2 && <NewsScenario key="news" group={scenarioGroups.news} onComplete={(res) => handleScenarioComplete('news', res)} />}
-        {step === 3 && <FlightScenario key="flight" group={scenarioGroups.flight} onComplete={(res) => handleScenarioComplete('flight', res)} />}
-        {step === 4 && <RecipeScenario key="recipe" group={scenarioGroups.recipe} onComplete={(res) => handleScenarioComplete('recipe', res)} />}
-        {step === 5 && <DownloadScenario key="download" group={scenarioGroups.download} onComplete={(res) => handleScenarioComplete('download', res)} />}
-        {step === 6 && <SurveyScenario key="survey" onComplete={handleSurveyComplete} />}
-        {step === 7 && <ResultScreen key="result" results={sessionData} />}
+        {step === 2 && <MiniSurvey key="mini-perfume" onComplete={(res) => handleMiniSurveyComplete('perfume', res)} />}
+        
+        {step === 3 && <NewsScenario key="news" group={scenarioGroups.news} onComplete={(res) => handleScenarioComplete('news', res)} />}
+        {step === 4 && <MiniSurvey key="mini-news" onComplete={(res) => handleMiniSurveyComplete('news', res)} />}
+        
+        {step === 5 && <FlightScenario key="flight" group={scenarioGroups.flight} onComplete={(res) => handleScenarioComplete('flight', res)} />}
+        {step === 6 && <MiniSurvey key="mini-flight" onComplete={(res) => handleMiniSurveyComplete('flight', res)} />}
+
+        {step === 7 && <DiscountScenario key="discount" group={scenarioGroups.discount} onComplete={(res) => handleScenarioComplete('discount', res)} />}
+        {step === 8 && <MiniSurvey key="mini-discount" onComplete={(res) => handleMiniSurveyComplete('discount', res)} />}
+
+        {step === 9 && <DownloadScenario key="download" group={scenarioGroups.download} onComplete={(res) => handleScenarioComplete('download', res)} />}
+        {step === 10 && <MiniSurvey key="mini-download" onComplete={(res) => handleMiniSurveyComplete('download', res)} />}
+        
+        {step === 11 && <SurveyScenario key="final-survey" onComplete={handleFinalSurveyComplete} />}
+        {step === 12 && <ResultScreen key="result" results={sessionData} />}
       </main>
 
       <InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} debugMode={debugMode} setDebugMode={setDebugMode} />
