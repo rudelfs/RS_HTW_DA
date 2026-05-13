@@ -7,7 +7,7 @@ export default function InfoModal({ isOpen, onClose, debugMode, setDebugMode }) 
         
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic">MenuMaze</h2>
+          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Cookienator 9000</h2>
           <button onClick={onClose} className="text-2xl font-black hover:text-jade">✕</button>
         </div>
 
