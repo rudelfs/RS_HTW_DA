@@ -1,176 +1,196 @@
 export const translations = {
   de: {
-    // Header & Global
-    test_phase: "Test-Phase",
-    current_group: "Aktuelle Gruppe",
-    
-    // Onboarding
-    ob_title: "Willkommen",
+    // Phase 1: Onboarding & Task
+    ob_title: "Forschungsstudie",
     ob_age: "Ihr Alter:",
     ob_age_ph: "z.B. 25",
-    ob_age_err: "Bitte geben Sie ein gültiges Alter zwischen 0 und 99 Jahren ein.",
-    ob_tech: "Selbsteinschätzung Ihrer Internet-Erfahrung:",
+    ob_age_err: "Bitte geben Sie ein gültiges Alter ein.",
+    ob_tech: "Selbsteinschätzung Ihrer allgemeinen Internet-Erfahrung:",
     ob_tech_1: "Anfänger (1)",
     ob_tech_5: "Experte (5)",
-    
-    // NEU: Cookie-Vorwissen
-    ob_cookie_q: "Wissen Sie, was Cookies im Internet sind und welche Bedeutung sie haben?",
-    ob_cookie_yes: "Ja, das ist mir bekannt.",
-    ob_cookie_no: "Nein, nicht genau.",
-    ob_cookie_err: "Bitte beantworten Sie die Frage zu den Cookies.",
-    ob_cookie_info_title: "Was sind Cookies?",
-    ob_cookie_info_text: "Cookies sind kleine Textdateien, die Websites auf Ihrem Gerät speichern. Sie merken sich beispielsweise Ihre Einstellungen, was in Ihrem Warenkorb liegt, oder sammeln Daten darüber, wie Sie die Seite nutzen, um Ihnen passgenaue Werbung anzuzeigen.",
-    ob_cookie_info_btn: "Verstanden",
-    
     ob_start: "Studie Starten",
-
-    // Task Setting
+    
     ts_title: "Ihre Aufgabe",
-    ts_p1_1: "Stellen Sie sich vor, Sie möchten schnell die ",
-    ts_p1_2: "Wettervorhersage für morgen",
-    ts_p1_3: " prüfen. Sie klicken auf einen Link und gelangen auf eine Wetter-Website.",
-    ts_p2: "Bitte verhalten Sie sich so, wie Sie es auch im normalen Alltag auf Ihrem eigenen Gerät tun würden.",
-    ts_btn: "Verstanden, los geht's!",
+    ts_text: "Willkommen! Stellen Sie sich vor, Sie haben es eilig und müssen sofort wissen, ob Sie morgen einen Regenschirm brauchen. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird. Klicken Sie auf 'Start', wenn Sie bereit sind.",
+    ts_btn: "Start",
 
-    // Cookie Scenario
-    cs_site_title: "WetterMorgen.de",
-    cs_site_h2: "Wettervorhersage Berlin",
+    se_search: "Wetter morgen Berlin",
+    se_res1_title: "Wetterbericht online - wetter-schnell.de",
+    se_res1_desc: "Die genauste Vorhersage für Berlin. Regenradar, Temperatur und aktuelle Unwetterwarnungen.",
+    se_res2_title: "Berlin Wetter 14-Tage Trend - wetter24.de",
+    se_res2_desc: "Aktuelle Wetterprognose und Trends für die nächsten zwei Wochen in der Hauptstadt.",
+    se_res3_title: "Regenradar Berlin & Brandenburg - live-radar.net",
+    se_res3_desc: "Wird es nass? Schauen Sie auf unser minutengenaues Live-Radar für Berlin.",
+    se_res4_title: "Wetter-heute.de - Berlin Mitte Prognose",
+    se_res4_desc: "Stündliche Wettervorhersage, Niederschlagswahrscheinlichkeit und Windgeschwindigkeiten.",
+
+    // Phase 1: Cookie Banner
     cs_modal_title: "Ihre Privatsphäre ist uns wichtig",
     cs_modal_text: "Wir und unsere Partner speichern und/oder greifen auf Informationen auf einem Gerät zu, z.B. auf eindeutige Kennungen in Cookies, um personenbezogene Daten zu verarbeiten.",
-    cs_btn_accept: "Alle akzeptieren",
-    cs_btn_settings: "Auswahl erlauben",
+    cs_btn_accept: "Zustimmen",
+    cs_btn_settings: "Optionen",
     cs_btn_deny: "Ablehnen",
-    cs_link_hidden: "Nur essenzielle Cookies akzeptieren und Website mit starken Einschränkungen nutzen.",
 
-    // Micro Survey
-    mi_title: "Kurze Usability-Frage",
-    mi_q1: "„Es war für mich sofort ersichtlich, welche Auswahlmöglichkeiten ich habe.“",
-    mi_q2: "„Ich konnte meine gewünschte Auswahl schnell und ohne großen Aufwand treffen.“",
-    mi_scale_1: "Gar nicht (1)",
-    mi_scale_5: "Voll und ganz (5)",
-    mi_btn: "Weiter zum nächsten Szenario",
+    // Phase 2: Weather & Micro-Survey
+    wr_weather_title: "Wetter Berlin",
+    wr_weather_data: "15°C",
+    wr_weather_desc: "Starker Regen",
+    wr_trend_title: "7-Tage-Trend (Berlin)",
+    wr_radar_title: "Niederschlagsradar",
+    wr_radar_text: "Klicken zum Aktivieren",
+    wr_btn_finish: "Aufgabe beendet & weiter zur Umfrage",
+    
+    wr_check_title: "Überprüfung",
+    wr_check_text: "Um zu prüfen, ob Sie die Aufgabe erfolgreich gelöst haben: Wie wird das Wetter morgen laut der Webseite?",
+    wr_check_opts: ["Sonnig", "Starker Regen", "Schnee"],
+    wr_check_btn: "Weiter",
 
-    // Macro Survey (Auflösung)
-    ma_rev_title: "Abschliessende Befragung",
-    ma_rev_text: "Vielen Dank für Ihre bisherigen Antworten. Diese Studie testete nicht primär die allgemeine Nutzbarkeit, sondern die Wirkung sogenannter „Dark Patterns“ (manipulatives Design) auf Cookie-Bannern.",
-    ma_rev_btn: "Zur abschließenden Befragung",
-    
-    ma_title: "Noch ein paar Fragen",
-    ma_ref_title: "Referenz-Design für die Fragen",
-    ma_ref_modal: "Privatsphäre",
-    
-    ma_q1: "Wie häufig begegnen Ihnen Cookie-Menüs in genau dieser oder einer sehr ähnlichen visuellen Gestaltung (farbiger Hauptbutton, farblose Alternativen) in Ihrem Alltag?",
-    ma_q1_1: "Sehr selten (1)",
-    ma_q1_5: "Sehr oft (5)",
-    
-    ma_q2: "Achten Sie im Alltag bewusst darauf, ob Sie Cookies akzeptieren oder ablehnen?",
-    ma_q2_opts: ["Ja, immer", "Meistens", "Selten", "Nein, ich klicke einfach weg"],
-    
-    ma_q3: "Wenn Sie Cookies akzeptieren, tun Sie dies meistens aus inhaltlicher Überzeugung, oder eher, um das Menü so schnell wie möglich auszublenden?",
-    ma_q3_opts: ["Inhaltliche Überzeugung", "Bequemlichkeit & Zeitersparnis", "Teils, teils"],
-    
-    ma_q4: "Wenn es eine zentrale Browser-Einstellung gäbe, die Cookie-Banner für immer überflüssig macht: Würden Sie standardmäßig „Alle ablehnen“ oder „Alle akzeptieren“ wählen?",
-    ma_q4_opts: ["Alle ablehnen", "Alle akzeptieren"],
-    
-    ma_q5: "Betrachten Sie das oben eingeblendete Design. Empfinden Sie die farbliche Hervorhebung des Zustimmungs-Buttons primär als eine hilfreiche Navigation oder als eine bewusste, manipulative Lenkung?",
-    ma_q5_1: "Hilfreiche Navigation (1)",
-    ma_q5_4: "Neutral (4)",
-    ma_q5_7: "Klare Manipulation (7)",
-    
-    ma_q6: "Haben Sie noch Anmerkungen zu Ihrer Bewertung im obigen Schieberegler? Warum haben Sie sich so entschieden? (Optional)",
-    ma_q6_ph: "Ihre Gedanken hierzu...",
-    
-    ma_btn: "Studie abschließen & Daten senden",
+    mi_title: "Erster Eindruck",
+    mi_text: "Bitte bewerten Sie nun Ihren ersten Eindruck von der gerade besuchten Webseite. (1 = Stimme gar nicht zu, 7 = Stimme voll zu)",
+    mi_q1: "Ich halte die bereitgestellten Wetterinformationen auf dieser Seite für verlässlich.",
+    mi_q1_reason: "Warum haben Sie sich für diese Bewertung entschieden? Bitte erklären Sie kurz Ihren Gedankengang.",
+    mi_q1_ph: "Ich habe so bewertet, weil...",
+    mi_scale_1: "Stimme gar nicht zu",
+    mi_scale_7: "Stimme voll zu",
+    mi_btn: "Weiter",
 
-    // Result Screen
-    rs_title: "Ergebnisse (Für Datenbank)",
-    rs_text: "Diese Daten würden nun an Supabase gesendet werden."
+    // Phase 3: Recall & Qualitative
+    re_title: "Erinnerung & Reflexion",
+    re_q1: "Bevor Sie das Wetter für morgen sehen konnten, erschien ein Datenschutz-Banner (Cookie-Banner). Haben Sie den Text oder die Auswahlmöglichkeiten in diesem Banner gelesen, bevor Sie geklickt haben?",
+    re_q1_opts: ["Ja, vollständig", "Ja, teilweise", "Nein, gar nicht", "Ich kann mich an kein Banner erinnern"],
+    re_q2: "Warum haben Sie sich bei dem Banner für genau die angeklickte Option entschieden? Bitte erklären Sie kurz Ihren Gedankengang in 1-2 Sätzen.",
+    re_q2_ph: "Ich habe mich so entschieden, weil...",
+    re_btn: "Weiter",
+
+    // Phase 4 & 5: Reveal & Macro-Survey
+    ma_reveal_title: "Aufklärung",
+    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, war bei diesem Banner ein Button farblich hervorgehoben, während die anderen Optionen grau hinterlegt waren. Solche sogenannten 'Dark Patterns' zielen darauf ab, Nutzer visuell zu einer schnellen Zustimmung zu drängen.",
+    ma_reveal_B: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, waren bei diesem Banner alle Buttons in identischen Grautönen hinterlegt, um Sie visuell nicht in eine bestimmte Richtung zu drängen.",
+    ma_reveal_btn: "Weiter zur Bewertung",
+    
+    ma_title: "Bewertung des Banners",
+    ma_text: "Bitte bewerten Sie nun die visuelle Gestaltung dieses Banners. (1 = Stimme gar nicht zu, 7 = Stimme voll zu)",
+    ma_q1: "Das Design dieses Banners lenkt die Aufmerksamkeit stark auf eine bestimmte Auswahlmöglichkeit.",
+    ma_q2: "Ich hatte bei diesem Banner das Gefühl, meine Entscheidung völlig frei und unbeeinflusst treffen zu können.",
+    ma_q3: "Ich empfinde die visuelle Darstellung der Optionen als fair und ausgewogen.",
+    ma_q4: "Die Gestaltung des Banners passt zu einer professionellen und vertrauenswürdigen Webseite.",
+    ma_q5: "Wenn ich dieses Banner sehe, gehe ich davon aus, dass die Webseite großen Wert auf die Interessen ihrer Nutzer:innen legt.",
+    ma_btn: "Weiter",
+
+    // Phase 6: Kontrollvariablen
+    co_title: "Alltag & Wissen",
+    co_q1: "Wie oft begegnen Ihnen im Alltag Cookie-Banner beim Surfen im Internet?",
+    co_q1_opts: ["Mehrmals täglich", "Etwa einmal am Tag", "Mehrmals pro Woche", "Selten", "Nie"],
+    co_q2: "Was ist im Alltag Ihre grundsätzliche, bevorzugte Entscheidung bei solchen Bannern?",
+    co_q2_opts: [
+      "Ich möchte generell alles ablehnen.",
+      "Ich möchte nur bestimmte (notwendige) Cookies akzeptieren.",
+      "Ich möchte generell alles akzeptieren.",
+      "Ich habe keine Präferenz / Es ist mir egal."
+    ],
+    co_q3: "Wie gut würden Sie Ihr eigenes Wissen darüber einschätzen, was Cookies sind und wofür sie im Internet verwendet werden? (1 = Sehr geringes Wissen, 7 = Sehr hohes Wissen)",
+    co_scale_1: "Sehr geringes Wissen",
+    co_scale_7: "Sehr hohes Wissen",
+    co_btn: "Studie abschließen",
+
+    rs_title: "Vielen Dank!",
+    rs_text: "Die Umfrage ist beendet. Ihre Daten wurden erfolgreich gespeichert. Vielen Dank für Ihre Teilnahme an dieser Forschungsarbeit!"
   },
   en: {
-    // Header & Global
-    test_phase: "Test Phase",
-    current_group: "Current Group",
-    
-    // Onboarding
+    // Phase 1: Onboarding & Task
     ob_title: "Research Study",
     ob_age: "Your Age:",
     ob_age_ph: "e.g. 25",
-    ob_age_err: "Please enter a valid age between 0 and 99.",
-    ob_tech: "Self-assessment of your internet experience:",
+    ob_age_err: "Please enter a valid age.",
+    ob_tech: "Self-assessment of your general internet experience:",
     ob_tech_1: "Beginner (1)",
     ob_tech_5: "Expert (5)",
-    
-    // NEW: Cookie Knowledge
-    ob_cookie_q: "Do you know what internet cookies are and what they mean?",
-    ob_cookie_yes: "Yes, I know.",
-    ob_cookie_no: "No, not exactly.",
-    ob_cookie_err: "Please answer the question about cookies.",
-    ob_cookie_info_title: "What are Cookies?",
-    ob_cookie_info_text: "Cookies are small text files that websites store on your device. For example, they remember your settings, what's in your shopping cart, or collect data about how you use the site to show you targeted advertisements.",
-    ob_cookie_info_btn: "Understood",
-    
     ob_start: "Start Study",
-
-    // Task Setting
+    
     ts_title: "Your Task",
-    ts_p1_1: "Imagine you quickly want to check the ",
-    ts_p1_2: "weather forecast for tomorrow",
-    ts_p1_3: ". You click a link and land on a weather website.",
-    ts_p2: "Please behave exactly as you normally would on your own device.",
-    ts_btn: "Understood, let's go!",
+    ts_text: "Welcome! Imagine you are in a hurry and need to know immediately whether you need an umbrella in Berlin tomorrow. Please find out what the weather will be like tomorrow on the following page as quickly as possible. Click 'Start' when you are ready.",
+    ts_btn: "Start",
 
-    // Cookie Scenario
-    cs_site_title: "WeatherTomorrow",
-    cs_site_h2: "Weather Forecast Berlin",
+    se_search: "Weather tomorrow Berlin",
+    se_res1_title: "Weather Forecast Online - wetter-schnell.de",
+    se_res1_desc: "The most accurate forecast for Berlin. Rain radar, temperature, and current severe weather warnings.",
+    se_res2_title: "Berlin Weather 14-Day Trend - wetter24.de",
+    se_res2_desc: "Current weather forecast and trends for the next two weeks in the capital city.",
+    se_res3_title: "Rain Radar Berlin & Brandenburg - live-radar.net",
+    se_res3_desc: "Is it going to rain? Check out our minute-by-minute live radar for Berlin.",
+    se_res4_title: "Weather-today.de - Berlin Mitte Forecast",
+    se_res4_desc: "Hourly weather forecast, probability of precipitation, and wind speeds.",
+
+    // Phase 1: Cookie Banner
     cs_modal_title: "Your privacy is important to us",
-    cs_modal_text: "We and our partners store and/or access information on a device, such as unique IDs in cookies, to process personal data.",
-    cs_btn_accept: "Accept all",
-    cs_btn_settings: "Allow selection",
-    cs_btn_deny: "Deny",
-    cs_link_hidden: "Only accept essential cookies and use the website with strong limitations.",
+    cs_modal_text: "We and our partners store and/or access information on a device, such as unique identifiers in cookies, to process personal data.",
+    cs_btn_accept: "Accept",
+    cs_btn_settings: "Options",
+    cs_btn_deny: "Reject",
 
-    // Micro Survey
-    mi_title: "Short Usability Question",
-    mi_q1: "\"It was immediately clear to me what choices I had.\"",
-    mi_q2: "\"I was able to make my desired choice quickly and without much effort.\"",
-    mi_scale_1: "Not at all (1)",
-    mi_scale_5: "Completely (5)",
-    mi_btn: "Continue to next scenario",
+    // Phase 2: Weather & Micro-Survey
+    wr_weather_title: "Weather Berlin",
+    wr_weather_data: "15°C",
+    wr_weather_desc: "Heavy Rain",
+    wr_trend_title: "7-Day Trend (Berlin)",
+    wr_radar_title: "Precipitation Radar",
+    wr_radar_text: "Click to activate",
+    wr_btn_finish: "Task finished & continue to survey",
+    
+    wr_check_title: "Verification",
+    wr_check_text: "To verify if you successfully completed the task: What will the weather be like tomorrow according to the website?",
+    wr_check_opts: ["Sunny", "Heavy Rain", "Snow"],
+    wr_check_btn: "Continue",
 
-    // Macro Survey (Resolution)
-    ma_rev_title: "The Resolution",
-    ma_rev_text: "Thank you for your answers so far. This study primarily tested not general usability, but the effect of so-called \"Dark Patterns\" (manipulative design) on cookie banners.",
-    ma_rev_btn: "To final survey",
-    
-    ma_title: "Final Survey",
-    ma_ref_title: "Reference Design for questions",
-    ma_ref_modal: "Privacy",
-    
-    ma_q1: "How often do you encounter cookie menus in this or a very similar visual design (colored main button, colorless alternatives) in your daily life?",
-    ma_q1_1: "Very rarely (1)",
-    ma_q1_5: "Very often (5)",
-    
-    ma_q2: "In your daily life, do you consciously pay attention to whether you accept or reject cookies?",
-    ma_q2_opts: ["Yes, always", "Mostly", "Rarely", "No, I just click them away"],
-    
-    ma_q3: "If you accept cookies, do you usually do so out of conviction, or rather to hide the menu as quickly as possible?",
-    ma_q3_opts: ["Conviction", "Convenience & time saving", "A bit of both"],
-    
-    ma_q4: "If there was a central browser setting that made cookie banners permanently obsolete: Would you choose 'Reject all' or 'Accept all' by default?",
-    ma_q4_opts: ["Reject all", "Accept all"],
-    
-    ma_q5: "Look at the design above. Do you perceive the colored highlighting of the accept button primarily as helpful navigation or as deliberate, manipulative steering?",
-    ma_q5_1: "Helpful Navigation (1)",
-    ma_q5_4: "Neutral (4)",
-    ma_q5_7: "Clear Manipulation (7)",
-    
-    ma_q6: "Do you have any comments on your rating in the slider above? Why did you decide this way? (Optional)",
-    ma_q6_ph: "Your thoughts...",
-    
-    ma_btn: "Complete study & send data",
+    mi_title: "First Impression",
+    mi_text: "Please rate your first impression of the website you just visited. (1 = Strongly disagree, 7 = Strongly agree)",
+    mi_q1: "I consider the weather information provided on this page to be reliable.",
+    mi_q1_reason: "Why did you choose this rating? Please briefly explain your thought process.",
+    mi_q1_ph: "I rated it this way because...",
+    mi_scale_1: "Strongly disagree",
+    mi_scale_7: "Strongly agree",
+    mi_btn: "Continue",
 
-    // Result Screen
-    rs_title: "Results (For Database)",
-    rs_text: "This data would now be sent to Supabase."
+    // Phase 3: Recall & Qualitative
+    re_title: "Recall & Reflection",
+    re_q1: "Before you could see tomorrow's weather, a privacy banner (cookie banner) appeared. Did you read the text or the selection options in this banner before clicking?",
+    re_q1_opts: ["Yes, completely", "Yes, partially", "No, not at all", "I cannot remember any banner"],
+    re_q2: "Why did you decide to click that exact option on the banner? Please briefly explain your thought process in 1-2 sentences.",
+    re_q2_ph: "I chose this option because...",
+    re_btn: "Continue",
+
+    // Phase 4 & 5: Reveal & Macro-Survey
+    ma_reveal_title: "Disclosure",
+    ma_reveal_A: "At the beginning of this task, you closed a privacy banner. As shown in the illustration, one button in this banner was highlighted in color, while the other options were shaded gray. Such designs, known as 'Dark Patterns', aim to visually push users toward fast consent.",
+    ma_reveal_B: "At the beginning of this task, you closed a privacy banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray, avoiding any visual steering in a specific direction.",
+    ma_reveal_btn: "Continue to evaluation",
+    
+    ma_title: "Banner Evaluation",
+    ma_text: "Please rate the visual design of this banner. (1 = Strongly disagree, 7 = Strongly agree)",
+    ma_q1: "The design of this banner strongly steers attention toward a specific choice.",
+    ma_q2: "I felt that I could make my decision completely freely and without influence on this banner.",
+    ma_q3: "I perceive the visual representation of the options as fair and balanced.",
+    ma_q4: "The design of the banner matches a professional and trustworthy website.",
+    ma_q5: "When I see this banner, I assume that the website highly values the interests of its users.",
+    ma_btn: "Continue",
+
+    // Phase 6: Control Variables
+    co_title: "Daily Life & Knowledge",
+    co_q1: "How often do you encounter cookie banners in your daily life while surfing the internet?",
+    co_q1_opts: ["Multiple times a day", "About once a day", "Multiple times a week", "Rarely", "Never"],
+    co_q2: "What is your basic, preferred choice regarding such banners in daily life?",
+    co_q2_opts: [
+      "I generally want to reject everything.",
+      "I only want to accept certain (necessary) cookies.",
+      "I generally want to accept everything.",
+      "I have no preference / I do not care."
+    ],
+    co_q3: "How well would you rate your own knowledge of what cookies are and what they are used for on the internet? (1 = Very low knowledge, 7 = Very high knowledge)",
+    co_scale_1: "Very low knowledge",
+    co_scale_7: "Very high knowledge",
+    co_btn: "Complete Study",
+
+    rs_title: "Thank You!",
+    rs_text: "The survey is complete. Your data has been successfully saved. Thank you for participating in this research project!"
   }
 };

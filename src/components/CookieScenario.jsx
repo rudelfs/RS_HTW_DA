@@ -1,162 +1,202 @@
 import { useState, useEffect } from 'react';
 import BrowserWindow from './BrowserWindow';
 
-export default function CookieScenario({ group, t, onComplete }) {
+export default function CookieScenario({ group, t, siteName, siteUrl, onTrackClick, onComplete }) {
   const [startTime, setStartTime] = useState(null);
-  
-  // Neue States für das Einstellungs-Menü
+  const [showBanner, setShowBanner] = useState(false); // NEU: Steuert, wann das Banner erscheint
   const [showSettings, setShowSettings] = useState(false);
+  
   const [cookieOptions, setCookieOptions] = useState({
-    essential: true, // Verpflichtend!
+    essential: true,
     analytics: false,
     marketing: false,
     social: false
   });
 
+  const displayName = siteName || t.cs_site_title || "wetter-schnell.de";
+  const displayUrl = siteUrl || "wetter-schnell.de/berlin";
+
+  const trendDays = [
+    { day: "Di", icon: "🌧️", temp: "15° / 9°" },
+    { day: "Mi", icon: "⛅", temp: "17° / 11°" },
+    { day: "Do", icon: "☀️", temp: "20° / 12°" },
+    { day: "Fr", icon: "⛅", temp: "19° / 10°" },
+    { day: "Sa", icon: "🌧️", temp: "14° / 8°" }
+  ];
+
   useEffect(() => {
-    setStartTime(Date.now());
+    // 500ms warten, bevor das Banner erscheint und die Seite verschwimmt
+    const timer = setTimeout(() => {
+      setShowBanner(true);
+      setStartTime(Date.now()); // Stoppuhr startet erst, wenn das Banner sichtbar wird!
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  // Behandelt Klicks auf dem ersten Screen
   const handleChoice = (choice) => {
     if (choice === 'settings') {
-      setShowSettings(true); // Menü öffnen anstatt zu beenden
+      setShowSettings(true);
       return;
     }
-    
-    // Wenn "Alle akzeptieren" oder "Ablehnen" geklickt wird
     const timeOnTask = Date.now() - startTime;
     onComplete({ 
       choice, 
       timeOnTaskMs: timeOnTask,
-      // Speichere ab, was dies effektiv für die Cookies bedeutet
       options: choice === 'accept' 
         ? { essential: true, analytics: true, marketing: true, social: true } 
         : { essential: true, analytics: false, marketing: false, social: false }
     });
   };
 
-  // Behandelt den "Speichern"-Klick im Einstellungs-Menü
   const handleSaveSettings = () => {
     const timeOnTask = Date.now() - startTime;
-    onComplete({
-      choice: 'saved_settings',
-      timeOnTaskMs: timeOnTask,
-      options: cookieOptions
-    });
+    onComplete({ choice: 'saved_settings', timeOnTaskMs: timeOnTask, options: cookieOptions });
   };
 
   const toggleOption = (key) => {
-    if (key === 'essential') return; // Sicherstellen, dass "essential" nie geändert wird
+    if (key === 'essential') return;
     setCookieOptions(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
-    <BrowserWindow url="wettermorgen.de/lokal">
-      <div className="font-sans relative bg-slate-50 min-h-[800px] overflow-hidden">
+    <BrowserWindow url={displayUrl}>
+      <div className="font-sans relative bg-slate-50 min-h-[800px] overflow-hidden text-left">
         
-        <header className="bg-blue-600 text-white p-4 md:p-6 shadow-md"><h1 className="text-xl md:text-3xl font-black">{t.cs_site_title}</h1></header>
-        <main className="p-4 md:p-8 max-w-4xl mx-auto blur-md pointer-events-none">
-          <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm mb-6 h-64 border border-slate-200">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-800">{t.cs_site_h2}</h2>
+        {/* Realistische Navigation */}
+        <header className="bg-[#0f172a] text-white p-4 shadow-md flex justify-between items-center relative z-0">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">🌤️</span>
+            <div>
+              <h1 className="text-xl md:text-2xl font-black leading-none max-w-[200px] md:max-w-none truncate">{displayName}</h1>
+              <span className="text-[10px] text-blue-300 uppercase tracking-widest">Live Report</span>
+            </div>
           </div>
+          <div className="hidden md:flex gap-6 text-sm font-bold text-slate-300">
+            <span className="text-white border-b-2 border-blue-400 pb-1">Heute</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_14Tage')}>14-Tage</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Regenradar')}>Regenradar</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Pollenflug')}>Pollenflug</span>
+          </div>
+        </header>
+
+        {/* Realistischer Hintergrund (Verschwimmt erst, wenn showBanner = true ist) */}
+        <main className={`p-4 md:p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-0 transition-all duration-300 ${showBanner ? 'blur-md pointer-events-none opacity-80' : ''}`}>
+          
+          <div className="md:col-span-2 space-y-6">
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+              <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 pb-12">
+                <h2 className="text-2xl font-bold mb-1">Berlin, Deutschland</h2>
+                <p className="text-blue-200 text-sm">Vorhersage für Morgen</p>
+                <div className="mt-8 flex items-center justify-between">
+                  <div className="flex items-center gap-6">
+                    <span className="text-7xl drop-shadow-lg">🌧️</span>
+                    <div>
+                      <div className="text-6xl font-black tracking-tighter">{t.wr_weather_data || "15°C"}</div>
+                      <div className="text-xl font-medium mt-1 text-blue-100">{t.wr_weather_desc || "Starker Regen"}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white p-6 grid grid-cols-3 gap-4 text-center divide-x divide-slate-100">
+                <div><div className="text-slate-400 text-xs uppercase font-bold">Niederschlag</div><div className="font-bold text-lg text-slate-800">95%</div></div>
+                <div><div className="text-slate-400 text-xs uppercase font-bold">Wind</div><div className="font-bold text-lg text-slate-800">24 km/h</div></div>
+                <div><div className="text-slate-400 text-xs uppercase font-bold">Luftfeuchte</div><div className="font-bold text-lg text-slate-800">82%</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6 hidden md:block">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+              <h3 className="font-bold text-slate-700 text-sm mb-4 uppercase tracking-wider">{t.wr_trend_title || "7-Tage-Trend"}</h3>
+              <div className="space-y-3">
+                {trendDays.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center text-sm border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                    <span className="font-bold text-slate-500 w-8">{item.day}</span>
+                    <span className="text-xl">{item.icon}</span>
+                    <span className="font-mono text-slate-700 text-right font-bold">{item.temp}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </main>
 
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white p-6 md:p-8 w-full max-w-sm shadow-2xl rounded-xl relative">
-            
-            {/* ENTWEDER: Normaler Banner */}
-            {!showSettings ? (
-              <>
-                <h2 className="text-xl md:text-2xl font-bold mb-3">{t.cs_modal_title}</h2>
-                <p className="text-slate-600 mb-6 text-xs md:text-sm leading-relaxed">
-                  {t.cs_modal_text}
-                </p>
-
-                {/* GRUPPE A: Die Grauzone */}
-                {group === 'A' && (
-                  <div className="flex flex-col gap-2 md:gap-3">
-                    <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-purple-600 bg-purple-600 text-white rounded font-bold text-sm hover:bg-purple-700 hover:border-purple-700 transition-colors">
-                      {t.cs_btn_accept}
-                    </button>
-                    <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm bg-transparent hover:bg-slate-50 transition-colors">
-                      {t.cs_btn_settings}
-                    </button>
-                    <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm bg-transparent hover:bg-slate-50 transition-colors">
-                      {t.cs_btn_deny}
-                    </button>
-                  </div>
-                )}
-
-                {/* GRUPPE B: Privacy by Design */}
-                {group === 'B' && (
-                  <div className="flex flex-col gap-2 md:gap-3">
-                    <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-slate-300 bg-slate-200 text-slate-700 rounded font-bold text-sm hover:bg-slate-300 transition-colors">
-                      {t.cs_btn_accept}
-                    </button>
-                    <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 bg-slate-200 text-slate-700 rounded font-bold text-sm hover:bg-slate-300 transition-colors">
-                      {t.cs_btn_settings}
-                    </button>
-                    <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 bg-slate-200 text-slate-700 rounded font-bold text-sm hover:bg-slate-300 transition-colors">
-                      {t.cs_btn_deny}
-                    </button>
-                  </div>
-                )}
-
-                {/* GRUPPE C: Illegales Dark Pattern */}
-                {group === 'C' && (
-                  <div className="flex flex-col items-center gap-3 md:gap-4">
-                    <button onClick={() => handleChoice('accept')} className="w-full py-4 md:py-5 border-2 border-blue-600 bg-blue-600 text-white rounded-xl font-black text-lg md:text-xl shadow-lg hover:bg-blue-700 transition-colors">
-                      {t.cs_btn_accept}
-                    </button>
-                    <button onClick={() => handleChoice('deny_hidden')} className="text-[10px] md:text-[11px] text-slate-400 underline hover:text-slate-600 mt-2 text-center px-2">
-                      {t.cs_link_hidden}
-                    </button>
-                  </div>
-                )}
-              </>
-            ) : (
+        {/* Banner Overlay (Wird erst nach 500ms gerendert) */}
+        {showBanner && (
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] flex items-center justify-center p-4 z-50 animate-in fade-in duration-300">
+            <div className="bg-white p-6 md:p-8 w-full max-w-md shadow-2xl rounded-xl relative animate-window-pop">
               
-              /* ODER: Detail-Menü für die Einstellungen */
-              <div className="animate-window-pop">
-                <h2 className="text-xl md:text-2xl font-bold mb-4">{t.cs_settings_title || "Präferenzen verwalten"}</h2>
-                <div className="space-y-3 mb-6">
-                  
-                  {/* Verpflichtende Option */}
-                  <label className="flex items-center justify-between p-3 border border-slate-200 bg-slate-50 rounded cursor-not-allowed opacity-70">
-                    <span className="text-sm font-bold text-slate-700">{t.cs_opt_essential || "Essenzielle Cookies"}</span>
-                    <input type="checkbox" checked={true} disabled className="w-5 h-5 accent-blue-600" />
-                  </label>
-                  
-                  {/* Freiwillige Optionen */}
-                  <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
-                    <span className="text-sm font-medium text-slate-700">{t.cs_opt_analytics || "Analyse & Statistiken"}</span>
-                    <input type="checkbox" checked={cookieOptions.analytics} onChange={() => toggleOption('analytics')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
-                  </label>
-                  
-                  <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
-                    <span className="text-sm font-medium text-slate-700">{t.cs_opt_marketing || "Marketing & Personalisierung"}</span>
-                    <input type="checkbox" checked={cookieOptions.marketing} onChange={() => toggleOption('marketing')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
-                  </label>
-                  
-                  <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
-                    <span className="text-sm font-medium text-slate-700">{t.cs_opt_social || "Social Media Integration"}</span>
-                    <input type="checkbox" checked={cookieOptions.social} onChange={() => toggleOption('social')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
-                  </label>
+              {!showSettings ? (
+                <>
+                  <h2 className="text-xl md:text-2xl font-bold mb-3">{t.cs_modal_title}</h2>
+                  <p className="text-slate-600 mb-6 text-sm leading-relaxed">{t.cs_modal_text}</p>
 
+                  {group === 'A' ? (
+                    <div className="flex flex-col gap-3">
+                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-purple-600 bg-purple-600 text-white rounded font-bold text-sm hover:bg-purple-700 transition-colors">
+                        {t.cs_btn_accept}
+                      </button>
+                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">
+                        {t.cs_btn_settings}
+                      </button>
+                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">
+                        {t.cs_btn_deny}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-3">
+                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
+                        {t.cs_btn_accept}
+                      </button>
+                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
+                        {t.cs_btn_settings}
+                      </button>
+                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
+                        {t.cs_btn_deny}
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="animate-window-pop">
+                  <h2 className="text-xl md:text-2xl font-bold mb-4">{t.cs_settings_title || "Optionen"}</h2>
+                  <div className="space-y-3 mb-6">
+                    
+                    <label className="flex items-center justify-between p-3 border border-slate-200 bg-slate-50 rounded opacity-60 cursor-not-allowed">
+                      <span className="text-sm font-bold text-slate-700">{t.cs_opt_essential || "Essenzielle Cookies"}</span>
+                      <input type="checkbox" checked={true} disabled className="w-5 h-5 accent-blue-600" />
+                    </label>
+                    
+                    <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
+                      <span className="text-sm font-medium text-slate-700">{t.cs_opt_analytics || "Analyse & Statistiken"}</span>
+                      <input type="checkbox" checked={cookieOptions.analytics} onChange={() => toggleOption('analytics')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
+                    </label>
+                    
+                    <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
+                      <span className="text-sm font-medium text-slate-700">{t.cs_opt_marketing || "Marketing"}</span>
+                      <input type="checkbox" checked={cookieOptions.marketing} onChange={() => toggleOption('marketing')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
+                    </label>
+                    
+                    <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
+                      <span className="text-sm font-medium text-slate-700">{t.cs_opt_social || "Social Media"}</span>
+                      <input type="checkbox" checked={cookieOptions.social} onChange={() => toggleOption('social')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
+                    </label>
+
+                  </div>
+                  
+                  <button 
+                    onClick={handleSaveSettings}
+                    className="w-full py-3 bg-slate-800 text-white rounded font-bold text-sm hover:bg-slate-900 transition-colors"
+                  >
+                    {t.cs_btn_save || "Auswahl speichern"}
+                  </button>
                 </div>
-                
-                <button 
-                  onClick={handleSaveSettings}
-                  className="w-full py-3 bg-slate-800 text-white rounded font-bold text-sm hover:bg-slate-900 transition-colors"
-                >
-                  {t.cs_btn_save || "Auswahl speichern"}
-                </button>
-              </div>
-            )}
-
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </BrowserWindow>
   );
