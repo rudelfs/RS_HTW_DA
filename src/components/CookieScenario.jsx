@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import BrowserWindow from './BrowserWindow';
 
 export default function CookieScenario({ group, t, siteName, siteUrl, onTrackClick, onComplete }) {
-  const [startTime, setStartTime] = useState(null);
-  const [showBanner, setShowBanner] = useState(false); // NEU: Steuert, wann das Banner erscheint
+  const [bannerShowTime, setBannerShowTime] = useState(null);
+  const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   
   const [cookieOptions, setCookieOptions] = useState({
@@ -25,12 +25,10 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   ];
 
   useEffect(() => {
-    // 500ms warten, bevor das Banner erscheint und die Seite verschwimmt
     const timer = setTimeout(() => {
       setShowBanner(true);
-      setStartTime(Date.now()); // Stoppuhr startet erst, wenn das Banner sichtbar wird!
+      setBannerShowTime(performance.now());
     }, 500);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,10 +37,10 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
       setShowSettings(true);
       return;
     }
-    const timeOnTask = Date.now() - startTime;
+    const timeToClickMs = performance.now() - bannerShowTime;
     onComplete({ 
       choice, 
-      timeOnTaskMs: timeOnTask,
+      bannerInteractionTimeMs: timeToClickMs,
       options: choice === 'accept' 
         ? { essential: true, analytics: true, marketing: true, social: true } 
         : { essential: true, analytics: false, marketing: false, social: false }
@@ -50,8 +48,12 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   };
 
   const handleSaveSettings = () => {
-    const timeOnTask = Date.now() - startTime;
-    onComplete({ choice: 'saved_settings', timeOnTaskMs: timeOnTask, options: cookieOptions });
+    const timeToClickMs = performance.now() - bannerShowTime;
+    onComplete({ 
+      choice: 'saved_settings', 
+      bannerInteractionTimeMs: timeToClickMs, 
+      options: cookieOptions 
+    });
   };
 
   const toggleOption = (key) => {
@@ -61,9 +63,13 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
 
   return (
     <BrowserWindow url={displayUrl}>
-      <div className="font-sans relative bg-slate-50 min-h-[800px] overflow-hidden text-left">
+      <div className="font-sans relative bg-slate-50 min-h-[800px] overflow-hidden text-left" onClick={(e) => {
+        // Fallback catch für ungerichtete Klicks im Hintergrund
+        if (showBanner && e.target === e.currentTarget) {
+           onTrackClick('CookieBg_EmptySpace');
+        }
+      }}>
         
-        {/* Realistische Navigation */}
         <header className="bg-[#0f172a] text-white p-4 shadow-md flex justify-between items-center relative z-0">
           <div className="flex items-center gap-3">
             <span className="text-3xl">🌤️</span>
@@ -80,7 +86,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
           </div>
         </header>
 
-        {/* Realistischer Hintergrund (Verschwimmt erst, wenn showBanner = true ist) */}
         <main className={`p-4 md:p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-0 transition-all duration-300 ${showBanner ? 'blur-md pointer-events-none opacity-80' : ''}`}>
           
           <div className="md:col-span-2 space-y-6">
@@ -89,11 +94,11 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
                 <h2 className="text-2xl font-bold mb-1">Berlin, Deutschland</h2>
                 <p className="text-blue-200 text-sm">Vorhersage für Morgen</p>
                 <div className="mt-8 flex items-center justify-between">
-                  <div className="flex items-center gap-6">
-                    <span className="text-7xl drop-shadow-lg">🌧️</span>
+                  <div className="flex items-center gap-5">
+                    <span className="text-6xl drop-shadow-lg">🌧️</span>
                     <div>
-                      <div className="text-6xl font-black tracking-tighter">{t.wr_weather_data || "15°C"}</div>
-                      <div className="text-xl font-medium mt-1 text-blue-100">{t.wr_weather_desc || "Starker Regen"}</div>
+                      <div className="text-5xl font-medium tracking-tighter">{t.wr_weather_data || "15°C"}</div>
+                      <div className="text-lg font-medium mt-1 text-blue-100">{t.wr_weather_desc || "Starker Regen"}</div>
                     </div>
                   </div>
                 </div>
@@ -123,7 +128,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
 
         </main>
 
-        {/* Banner Overlay (Wird erst nach 500ms gerendert) */}
         {showBanner && (
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] flex items-center justify-center p-4 z-50 animate-in fade-in duration-300">
             <div className="bg-white p-6 md:p-8 w-full max-w-md shadow-2xl rounded-xl relative animate-window-pop">
@@ -135,27 +139,15 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
 
                   {group === 'A' ? (
                     <div className="flex flex-col gap-3">
-                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-purple-600 bg-purple-600 text-white rounded font-bold text-sm hover:bg-purple-700 transition-colors">
-                        {t.cs_btn_accept}
-                      </button>
-                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">
-                        {t.cs_btn_settings}
-                      </button>
-                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">
-                        {t.cs_btn_deny}
-                      </button>
+                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-purple-600 bg-purple-600 text-white rounded font-bold text-sm hover:bg-purple-700 transition-colors">{t.cs_btn_accept}</button>
+                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">{t.cs_btn_settings}</button>
+                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 text-slate-600 rounded font-bold text-sm hover:bg-slate-50 transition-colors">{t.cs_btn_deny}</button>
                     </div>
                   ) : (
                     <div className="flex flex-col gap-3">
-                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
-                        {t.cs_btn_accept}
-                      </button>
-                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
-                        {t.cs_btn_settings}
-                      </button>
-                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">
-                        {t.cs_btn_deny}
-                      </button>
+                      <button onClick={() => handleChoice('accept')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">{t.cs_btn_accept}</button>
+                      <button onClick={() => handleChoice('settings')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">{t.cs_btn_settings}</button>
+                      <button onClick={() => handleChoice('deny')} className="w-full py-3 border-2 border-slate-300 bg-slate-100 text-slate-700 rounded font-bold text-sm hover:bg-slate-200 transition-colors">{t.cs_btn_deny}</button>
                     </div>
                   )}
                 </>
@@ -163,33 +155,24 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
                 <div className="animate-window-pop">
                   <h2 className="text-xl md:text-2xl font-bold mb-4">{t.cs_settings_title || "Optionen"}</h2>
                   <div className="space-y-3 mb-6">
-                    
                     <label className="flex items-center justify-between p-3 border border-slate-200 bg-slate-50 rounded opacity-60 cursor-not-allowed">
                       <span className="text-sm font-bold text-slate-700">{t.cs_opt_essential || "Essenzielle Cookies"}</span>
                       <input type="checkbox" checked={true} disabled className="w-5 h-5 accent-blue-600" />
                     </label>
-                    
                     <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
                       <span className="text-sm font-medium text-slate-700">{t.cs_opt_analytics || "Analyse & Statistiken"}</span>
                       <input type="checkbox" checked={cookieOptions.analytics} onChange={() => toggleOption('analytics')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
                     </label>
-                    
                     <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
                       <span className="text-sm font-medium text-slate-700">{t.cs_opt_marketing || "Marketing"}</span>
                       <input type="checkbox" checked={cookieOptions.marketing} onChange={() => toggleOption('marketing')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
                     </label>
-                    
                     <label className="flex items-center justify-between p-3 border border-slate-200 rounded cursor-pointer hover:bg-slate-50">
                       <span className="text-sm font-medium text-slate-700">{t.cs_opt_social || "Social Media"}</span>
                       <input type="checkbox" checked={cookieOptions.social} onChange={() => toggleOption('social')} className="w-5 h-5 accent-blue-600 cursor-pointer" />
                     </label>
-
                   </div>
-                  
-                  <button 
-                    onClick={handleSaveSettings}
-                    className="w-full py-3 bg-slate-800 text-white rounded font-bold text-sm hover:bg-slate-900 transition-colors"
-                  >
+                  <button onClick={handleSaveSettings} className="w-full py-3 bg-slate-800 text-white rounded font-bold text-sm hover:bg-slate-900 transition-colors">
                     {t.cs_btn_save || "Auswahl speichern"}
                   </button>
                 </div>

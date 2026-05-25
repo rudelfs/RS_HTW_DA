@@ -1,27 +1,38 @@
-export default function BrowserWindow({ children, url }) {
-  return (
-    // Breiterer Rahmen (max-w-7xl) und Skalierung
-    <div className="w-full max-w-7xl mx-auto animate-window-pop text-base">
-      <div className="border-4 border-charcoal bg-white shadow-diy overflow-hidden flex flex-col">
-        <div className="bg-white border-b-4 border-charcoal p-4 flex items-center gap-4">
-          <div className="flex gap-2 shrink-0">
-            <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-[#ff5f56]"></div>
-            <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-[#ffbd2e]"></div>
-            <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-[#27c93f]"></div>
-          </div>
-          
-          <div className="flex-1 bg-dust border-2 border-charcoal px-4 py-2 flex items-center gap-2 overflow-hidden">
-            <span className="text-charcoal/40">🔒</span>
-            <span className="text-sm text-charcoal/80 truncate font-mono">
-              https://{url}
-            </span>
-          </div>
-        </div>
+export default function BrowserWindow({ children, url, animate = true }) {
+  // Strikte Trennung: Die Klasse wird nur geladen, wenn animate wirklich true ist.
+  const animationClass = animate ? 'animate-window-pop' : '';
 
-        {/* Deutlich höhere Mindesthöhe (800px) */}
-        <div className="bg-white min-h-[800px] overflow-auto relative">
-          {children}
+  return (
+    <div className={`bg-white border-4 border-charcoal rounded-t-lg shadow-diy max-w-5xl mx-auto overflow-hidden ${animationClass}`}>
+      
+      {/* Browser Bar */}
+      <div className="bg-slate-200 border-b-4 border-charcoal p-3 flex items-center gap-4">
+        {/* Fake Buttons */}
+        <div className="flex gap-2">
+          <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-red-400"></div>
+          <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-yellow-400"></div>
+          <div className="w-4 h-4 rounded-full border-2 border-charcoal bg-green-400"></div>
         </div>
+        
+        {/* Fake URL Bar */}
+        <div className="flex-1 bg-white border-2 border-charcoal rounded-full px-4 py-1 flex items-center justify-center relative">
+          <div className="absolute left-4 text-slate-400">🔒</div>
+          <span className="font-mono text-sm font-bold text-slate-700 tracking-tight truncate px-8">
+            {url}
+          </span>
+        </div>
+        
+        {/* Fake Menu */}
+        <div className="w-8 h-8 border-2 border-charcoal rounded flex flex-col items-center justify-center gap-1 bg-white">
+          <div className="w-4 h-0.5 bg-charcoal"></div>
+          <div className="w-4 h-0.5 bg-charcoal"></div>
+          <div className="w-4 h-0.5 bg-charcoal"></div>
+        </div>
+      </div>
+
+      {/* Page Content */}
+      <div className="relative">
+        {children}
       </div>
     </div>
   );

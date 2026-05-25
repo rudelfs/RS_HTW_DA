@@ -1,17 +1,16 @@
 export const translations = {
   de: {
-    // Phase 1: Onboarding & Task
     ob_title: "Forschungsstudie",
     ob_age: "Ihr Alter:",
     ob_age_ph: "z.B. 25",
     ob_age_err: "Bitte geben Sie ein gültiges Alter ein.",
     ob_tech: "Selbsteinschätzung Ihrer allgemeinen Internet-Erfahrung:",
-    ob_tech_1: "Anfänger (1)",
-    ob_tech_5: "Experte (5)",
+    ob_tech_1: "Kaum Erfahrung(1)",
+    ob_tech_5: "Sehr Viel Erfahrung (5)",
     ob_start: "Studie Starten",
     
     ts_title: "Ihre Aufgabe",
-    ts_text: "Willkommen! Stellen Sie sich vor, Sie haben es eilig und müssen sofort wissen, ob Sie morgen einen Regenschirm brauchen. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird. Klicken Sie auf 'Start', wenn Sie bereit sind.",
+    ts_text: "Willkommen! Stellen Sie sich vor, Sie haben es eilig und müssen wissen, ob es regnen wird. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird. Klicken Sie auf 'Start', wenn Sie bereit sind.",
     ts_btn: "Start",
 
     se_search: "Wetter morgen Berlin",
@@ -24,20 +23,18 @@ export const translations = {
     se_res4_title: "Wetter-heute.de - Berlin Mitte Prognose",
     se_res4_desc: "Stündliche Wettervorhersage, Niederschlagswahrscheinlichkeit und Windgeschwindigkeiten.",
 
-    // Phase 1: Cookie Banner
     cs_modal_title: "Ihre Privatsphäre ist uns wichtig",
     cs_modal_text: "Wir und unsere Partner speichern und/oder greifen auf Informationen auf einem Gerät zu, z.B. auf eindeutige Kennungen in Cookies, um personenbezogene Daten zu verarbeiten.",
     cs_btn_accept: "Zustimmen",
     cs_btn_settings: "Optionen",
     cs_btn_deny: "Ablehnen",
 
-    // Phase 2: Weather & Micro-Survey
     wr_weather_title: "Wetter Berlin",
     wr_weather_data: "15°C",
     wr_weather_desc: "Starker Regen",
     wr_trend_title: "7-Tage-Trend (Berlin)",
     wr_radar_title: "Niederschlagsradar",
-    wr_radar_text: "Klicken zum Aktivieren",
+    wr_radar_text: "im Moment nicht verfügbar",
     wr_btn_finish: "Aufgabe beendet & weiter zur Umfrage",
     
     wr_check_title: "Überprüfung",
@@ -47,14 +44,14 @@ export const translations = {
 
     mi_title: "Erster Eindruck",
     mi_text: "Bitte bewerten Sie nun Ihren ersten Eindruck von der gerade besuchten Webseite. (1 = Stimme gar nicht zu, 7 = Stimme voll zu)",
-    mi_q1: "Ich halte die bereitgestellten Wetterinformationen auf dieser Seite für verlässlich.",
-    mi_q1_reason: "Warum haben Sie sich für diese Bewertung entschieden? Bitte erklären Sie kurz Ihren Gedankengang.",
-    mi_q1_ph: "Ich habe so bewertet, weil...",
+    mi_q1: "Mein erster Eindruck ist, dass es sich hierbei um eine vertrauenswürdige Webseite handelt.",
+    mi_q2: "Ich gehe davon aus, dass dieser Anbieter meine Interessen als Nutzer:in respektiert.",
+    mi_q_reason: "Warum haben Sie sich für diese Bewertungen entschieden? Bitte erklären Sie kurz Ihren Gedankengang.",
+    mi_q_ph: "Ich habe so bewertet, weil...",
     mi_scale_1: "Stimme gar nicht zu",
     mi_scale_7: "Stimme voll zu",
     mi_btn: "Weiter",
 
-    // Phase 3: Recall & Qualitative
     re_title: "Erinnerung & Reflexion",
     re_q1: "Bevor Sie das Wetter für morgen sehen konnten, erschien ein Datenschutz-Banner (Cookie-Banner). Haben Sie den Text oder die Auswahlmöglichkeiten in diesem Banner gelesen, bevor Sie geklickt haben?",
     re_q1_opts: ["Ja, vollständig", "Ja, teilweise", "Nein, gar nicht", "Ich kann mich an kein Banner erinnern"],
@@ -62,9 +59,8 @@ export const translations = {
     re_q2_ph: "Ich habe mich so entschieden, weil...",
     re_btn: "Weiter",
 
-    // Phase 4 & 5: Reveal & Macro-Survey
     ma_reveal_title: "Aufklärung",
-    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, war bei diesem Banner ein Button farblich hervorgehoben, während die anderen Optionen grau hinterlegt waren. Solche sogenannten 'Dark Patterns' zielen darauf ab, Nutzer visuell zu einer schnellen Zustimmung zu drängen.",
+    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, nutzte dieses Banner ein spezifisches Design, bei dem ein Button farblich hervorgehoben war, während die anderen Optionen grau hinterlegt wurden.",
     ma_reveal_B: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, waren bei diesem Banner alle Buttons in identischen Grautönen hinterlegt, um Sie visuell nicht in eine bestimmte Richtung zu drängen.",
     ma_reveal_btn: "Weiter zur Bewertung",
     
@@ -77,7 +73,6 @@ export const translations = {
     ma_q5: "Wenn ich dieses Banner sehe, gehe ich davon aus, dass die Webseite großen Wert auf die Interessen ihrer Nutzer:innen legt.",
     ma_btn: "Weiter",
 
-    // Phase 6: Kontrollvariablen
     co_title: "Alltag & Wissen",
     co_q1: "Wie oft begegnen Ihnen im Alltag Cookie-Banner beim Surfen im Internet?",
     co_q1_opts: ["Mehrmals täglich", "Etwa einmal am Tag", "Mehrmals pro Woche", "Selten", "Nie"],
@@ -97,7 +92,6 @@ export const translations = {
     rs_text: "Die Umfrage ist beendet. Ihre Daten wurden erfolgreich gespeichert. Vielen Dank für Ihre Teilnahme an dieser Forschungsarbeit!"
   },
   en: {
-    // Phase 1: Onboarding & Task
     ob_title: "Research Study",
     ob_age: "Your Age:",
     ob_age_ph: "e.g. 25",
@@ -121,20 +115,18 @@ export const translations = {
     se_res4_title: "Weather-today.de - Berlin Mitte Forecast",
     se_res4_desc: "Hourly weather forecast, probability of precipitation, and wind speeds.",
 
-    // Phase 1: Cookie Banner
     cs_modal_title: "Your privacy is important to us",
     cs_modal_text: "We and our partners store and/or access information on a device, such as unique identifiers in cookies, to process personal data.",
     cs_btn_accept: "Accept",
     cs_btn_settings: "Options",
     cs_btn_deny: "Reject",
 
-    // Phase 2: Weather & Micro-Survey
     wr_weather_title: "Weather Berlin",
     wr_weather_data: "15°C",
     wr_weather_desc: "Heavy Rain",
     wr_trend_title: "7-Day Trend (Berlin)",
     wr_radar_title: "Precipitation Radar",
-    wr_radar_text: "Click to activate",
+    wr_radar_text: "currently unavailable",
     wr_btn_finish: "Task finished & continue to survey",
     
     wr_check_title: "Verification",
@@ -144,14 +136,14 @@ export const translations = {
 
     mi_title: "First Impression",
     mi_text: "Please rate your first impression of the website you just visited. (1 = Strongly disagree, 7 = Strongly agree)",
-    mi_q1: "I consider the weather information provided on this page to be reliable.",
-    mi_q1_reason: "Why did you choose this rating? Please briefly explain your thought process.",
-    mi_q1_ph: "I rated it this way because...",
+    mi_q1: "My first impression is that this is a trustworthy website.",
+    mi_q2: "I assume that this provider respects my interests as a user.",
+    mi_q_reason: "Why did you choose these ratings? Please briefly explain your thought process.",
+    mi_q_ph: "I rated it this way because...",
     mi_scale_1: "Strongly disagree",
     mi_scale_7: "Strongly agree",
     mi_btn: "Continue",
 
-    // Phase 3: Recall & Qualitative
     re_title: "Recall & Reflection",
     re_q1: "Before you could see tomorrow's weather, a privacy banner (cookie banner) appeared. Did you read the text or the selection options in this banner before clicking?",
     re_q1_opts: ["Yes, completely", "Yes, partially", "No, not at all", "I cannot remember any banner"],
@@ -159,10 +151,9 @@ export const translations = {
     re_q2_ph: "I chose this option because...",
     re_btn: "Continue",
 
-    // Phase 4 & 5: Reveal & Macro-Survey
     ma_reveal_title: "Disclosure",
-    ma_reveal_A: "At the beginning of this task, you closed a privacy banner. As shown in the illustration, one button in this banner was highlighted in color, while the other options were shaded gray. Such designs, known as 'Dark Patterns', aim to visually push users toward fast consent.",
-    ma_reveal_B: "At the beginning of this task, you closed a privacy banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray, avoiding any visual steering in a specific direction.",
+    ma_reveal_A: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, this banner used a specific design in which one button was highlighted in color, while the other options were shaded gray.",
+    ma_reveal_B: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray, avoiding any visual steering in a specific direction.",
     ma_reveal_btn: "Continue to evaluation",
     
     ma_title: "Banner Evaluation",
@@ -174,7 +165,6 @@ export const translations = {
     ma_q5: "When I see this banner, I assume that the website highly values the interests of its users.",
     ma_btn: "Continue",
 
-    // Phase 6: Control Variables
     co_title: "Daily Life & Knowledge",
     co_q1: "How often do you encounter cookie banners in your daily life while surfing the internet?",
     co_q1_opts: ["Multiple times a day", "About once a day", "Multiple times a week", "Rarely", "Never"],
