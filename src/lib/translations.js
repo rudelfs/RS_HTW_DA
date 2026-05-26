@@ -21,7 +21,7 @@ export const translations = {
     ws_btn: "Beginnen",
     
     ts_title: "Ihre Aufgabe",
-    ts_text: "Stellen Sie sich vor: Sie haben es extrem eilig. Sie müssen sofort wissen, ob es morgen regnet, um Ihre Pläne anzupassen. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird.",
+    ts_text: "Stellen Sie sich vor: Sie haben es eilig. Sie müssen wissen, ob es morgen regnet, um Ihre Pläne anzupassen. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird.",
     ts_btn: "Start",
 
     se_search: "Wetter morgen Berlin",
@@ -71,7 +71,7 @@ export const translations = {
     re_btn: "Weiter",
 
     ma_reveal_title: "Aufklärung",
-    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen ist, nutzte dieses Banner ein spezifisches Design, bei dem ein Button farblich hervorgehoben war, während die anderen Optionen grau hinterlegt wurden. Solche Designstrategien werden in der Forschung als 'Dark Patterns' bezeichnet. Dies sind Benutzeroberflächen, die darauf ausgelegt sind, Nutzer:innen subtil in ihren Entscheidungen zu beeinflussen. In diesem Fall diente die farbliche Hervorhebung dem Zweck, die vollständige Zustimmung zu allen Cookies als die attraktivste oder intuitivste Option erscheinen zu lassen.",
+    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen ist, nutzte dieses Banner ein spezifisches Design, bei dem ein Button farblich hervorgehoben war, während die anderen Optionen grau hinterlegt wurden. Solche Designstrategien werden als 'Dark Patterns' bezeichnet. Dies sind Benutzeroberflächen, die darauf ausgelegt sind, Nutzer:innen subtil in ihren Entscheidungen zu beeinflussen. In diesem Fall diente die farbliche Hervorhebung dem Zweck, die vollständige Zustimmung zu allen Cookies als die attraktivste Option erscheinen zu lassen.",
     ma_reveal_B: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen ist, waren bei diesem Banner alle Buttons in identischen Grautönen hinterlegt, um Sie visuell nicht in eine bestimmte Richtung zu lenken. Designs, die Nutzer:innen absichtlich durch farbliche Hervorhebungen oder versteckte Optionen manipulieren, nennt man in der Forschung 'Dark Patterns'. In der von Ihnen gesehenen Version wurde bewusst auf solche manipulativen Elemente verzichtet, um eine neutrale und unbeeinflusste Entscheidung zu ermöglichen.",
     ma_reveal_btn: "Weiter zur Bewertung",
     
