@@ -1,21 +1,32 @@
+// lib/translations.js
+
 export const translations = {
   de: {
-    ob_title: "Forschungsstudie",
+    ob_title: "Demografische Daten",
+    ob_text: "Zum Abschluss bitten wir Sie noch um einige statistische Angaben.",
     ob_age: "Ihr Alter:",
     ob_age_ph: "z.B. 25",
     ob_age_err: "Bitte geben Sie ein gültiges Alter ein.",
+    ob_gender: "Ihr Geschlecht:",
+    ob_gender_opts: ["Männlich", "Weiblich", "Divers", "Keine Angabe"],
+    ob_edu: "Ihr höchster Bildungsabschluss:",
+    ob_edu_opts: ["Noch in schulischer Ausbildung", "Hauptschulabschluss", "Realschulabschluss / Mittlere Reife", "Abitur / (Fach-)Hochschulreife", "Abgeschlossene Berufsausbildung", "Hochschulabschluss (Bachelor, Master, Diplom)", "Promotion", "Keine Angabe"],
     ob_tech: "Selbsteinschätzung Ihrer allgemeinen Internet-Erfahrung:",
-    ob_tech_1: "Kaum Erfahrung(1)",
-    ob_tech_5: "Sehr Viel Erfahrung (5)",
-    ob_start: "Studie Starten",
+    ob_tech_1: "Kaum Erfahrung (1)",
+    ob_tech_5: "Sehr viel Erfahrung (5)",
+    ob_start: "Studie abschließen",
+
+    ws_title: "Willkommen",
+    ws_text: "Herzlich willkommen zu dieser Untersuchung.\n\nIn den nächsten Minuten werden wir Ihr Nutzerverhalten in einem alltäglichen Online-Szenario untersuchen. Ihre Daten werden vollständig anonym erhoben und ausschließlich für Forschungszwecke verwendet.",
+    ws_btn: "Beginnen",
     
     ts_title: "Ihre Aufgabe",
-    ts_text: "Willkommen! Stellen Sie sich vor, Sie haben es eilig und müssen wissen, ob es regnen wird. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird. Klicken Sie auf 'Start', wenn Sie bereit sind.",
+    ts_text: "Stellen Sie sich vor: Sie haben es extrem eilig. Sie müssen sofort wissen, ob es morgen regnet, um Ihre Pläne anzupassen. Bitte finden Sie auf der folgenden Seite so schnell wie möglich heraus, wie das Wetter morgen wird.",
     ts_btn: "Start",
 
     se_search: "Wetter morgen Berlin",
     se_res1_title: "Wetterbericht online - wetter-schnell.de",
-    se_res1_desc: "Die genauste Vorhersage für Berlin. Regenradar, Temperatur und aktuelle Unwetterwarnungen.",
+    se_res1_desc: "Die genaueste Vorhersage für Berlin. Regenradar, Temperatur und aktuelle Unwetterwarnungen.",
     se_res2_title: "Berlin Wetter 14-Tage Trend - wetter24.de",
     se_res2_desc: "Aktuelle Wetterprognose und Trends für die nächsten zwei Wochen in der Hauptstadt.",
     se_res3_title: "Regenradar Berlin & Brandenburg - live-radar.net",
@@ -60,8 +71,8 @@ export const translations = {
     re_btn: "Weiter",
 
     ma_reveal_title: "Aufklärung",
-    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, nutzte dieses Banner ein spezifisches Design, bei dem ein Button farblich hervorgehoben war, während die anderen Optionen grau hinterlegt wurden.",
-    ma_reveal_B: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen, waren bei diesem Banner alle Buttons in identischen Grautönen hinterlegt, um Sie visuell nicht in eine bestimmte Richtung zu drängen.",
+    ma_reveal_A: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen ist, nutzte dieses Banner ein spezifisches Design, bei dem ein Button farblich hervorgehoben war, während die anderen Optionen grau hinterlegt wurden. Solche Designstrategien werden in der Forschung als 'Dark Patterns' bezeichnet. Dies sind Benutzeroberflächen, die darauf ausgelegt sind, Nutzer:innen subtil in ihren Entscheidungen zu beeinflussen. In diesem Fall diente die farbliche Hervorhebung dem Zweck, die vollständige Zustimmung zu allen Cookies als die attraktivste oder intuitivste Option erscheinen zu lassen.",
+    ma_reveal_B: "Zu Beginn dieser Studie haben Sie ein Cookie-Banner geschlossen. Wie in der Abbildung zu sehen ist, waren bei diesem Banner alle Buttons in identischen Grautönen hinterlegt, um Sie visuell nicht in eine bestimmte Richtung zu lenken. Designs, die Nutzer:innen absichtlich durch farbliche Hervorhebungen oder versteckte Optionen manipulieren, nennt man in der Forschung 'Dark Patterns'. In der von Ihnen gesehenen Version wurde bewusst auf solche manipulativen Elemente verzichtet, um eine neutrale und unbeeinflusste Entscheidung zu ermöglichen.",
     ma_reveal_btn: "Weiter zur Bewertung",
     
     ma_title: "Bewertung des Banners",
@@ -84,25 +95,50 @@ export const translations = {
       "Ich habe keine Präferenz / Es ist mir egal."
     ],
     co_q3: "Wie gut würden Sie Ihr eigenes Wissen darüber einschätzen, was Cookies sind und wofür sie im Internet verwendet werden? (1 = Sehr geringes Wissen, 7 = Sehr hohes Wissen)",
-    co_scale_1: "Sehr geringes Wissen",
-    co_scale_7: "Sehr hohes Wissen",
-    co_btn: "Studie abschließen",
+    co_q4: "Ich habe mich bei der Suche nach der Wettervorhersage gehetzt oder unter Zeitdruck gefühlt.",
+    co_scale_1: "Stimme gar nicht zu",
+    co_scale_7: "Stimme voll zu",
+    co_btn: "Weiter",
 
     rs_title: "Vielen Dank!",
-    rs_text: "Die Umfrage ist beendet. Ihre Daten wurden erfolgreich gespeichert. Vielen Dank für Ihre Teilnahme an dieser Forschungsarbeit!"
+    rs_text: "Die Umfrage ist beendet. Ihre Daten wurden erfolgreich gespeichert. Vielen Dank für Ihre Teilnahme an dieser Forschungsarbeit!",
+
+    // UI & Browser Banner Strings
+    bb_today: "Heute",
+    bb_14days: "14-Tage",
+    bb_radar: "Regenradar",
+    bb_pollen: "Pollenflug",
+    bb_live: "Live Report",
+    bb_location: "Berlin, Deutschland",
+    bb_forecast: "Vorhersage für Morgen",
+    bb_precip: "Niederschlag",
+    bb_wind: "Wind",
+    bb_humidity: "Luftfeuchte",
+    a11y_menu: "Barrierefreiheit",
+    a11y_font: "Text vergrößern (A+)",
+    a11y_contrast: "Hoher Kontrast"
   },
   en: {
-    ob_title: "Research Study",
+    ob_title: "Demographics",
+    ob_text: "Finally, we would like to ask you for some statistical information.",
     ob_age: "Your Age:",
     ob_age_ph: "e.g. 25",
     ob_age_err: "Please enter a valid age.",
+    ob_gender: "Your Gender:",
+    ob_gender_opts: ["Male", "Female", "Diverse", "Prefer not to say"],
+    ob_edu: "Highest Level of Education:",
+    ob_edu_opts: ["Still in school", "Lower secondary school", "Middle school", "High school diploma / A-Levels", "Completed apprenticeship", "University degree (Bachelor, Master, Diploma)", "Doctorate", "Prefer not to say"],
     ob_tech: "Self-assessment of your general internet experience:",
-    ob_tech_1: "Beginner (1)",
-    ob_tech_5: "Expert (5)",
-    ob_start: "Start Study",
+    ob_tech_1: "Very little experience (1)",
+    ob_tech_5: "Very experienced (5)",
+    ob_start: "Complete Study",
+
+    ws_title: "Welcome",
+    ws_text: "Welcome to this study.\n\nOver the next few minutes, we will investigate your user behavior in an everyday online scenario. Your data will be collected completely anonymously and used exclusively for research purposes.",
+    ws_btn: "Begin",
     
     ts_title: "Your Task",
-    ts_text: "Welcome! Imagine you are in a hurry and need to know immediately whether you need an umbrella in Berlin tomorrow. Please find out what the weather will be like tomorrow on the following page as quickly as possible. Click 'Start' when you are ready.",
+    ts_text: "Imagine you are in an hurry. You need to know whether it will rain tomorrow so you can adjust your plans. Please find out what the weather will be like tomorrow on the following page as quickly as possible.",
     ts_btn: "Start",
 
     se_search: "Weather tomorrow Berlin",
@@ -152,8 +188,8 @@ export const translations = {
     re_btn: "Continue",
 
     ma_reveal_title: "Disclosure",
-    ma_reveal_A: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, this banner used a specific design in which one button was highlighted in color, while the other options were shaded gray.",
-    ma_reveal_B: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray, avoiding any visual steering in a specific direction.",
+    ma_reveal_A: "At the beginning of this study, you interacted with a cookie banner. As shown in the illustration, this banner used a specific design in which one button was highlighted in color, while the other options were shaded gray. Such design strategies are referred to in research as 'Dark Patterns'. These are user interfaces designed to subtly influence users in their decision-making. In this case, the color highlighting served the purpose of making the complete consent to all cookies appear as the most attractive or intuitive option.",
+    ma_reveal_B: "At the beginning of this study, you interacted with a cookie banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray to avoid steering you visually in a specific direction. Designs that intentionally manipulate users through color highlighting or hidden options are called 'Dark Patterns' in research. In the version you saw, such manipulative elements were deliberately omitted to allow for a neutral and uninfluenced decision.",
     ma_reveal_btn: "Continue to evaluation",
     
     ma_title: "Banner Evaluation",
@@ -176,11 +212,27 @@ export const translations = {
       "I have no preference / I do not care."
     ],
     co_q3: "How well would you rate your own knowledge of what cookies are and what they are used for on the internet? (1 = Very low knowledge, 7 = Very high knowledge)",
-    co_scale_1: "Very low knowledge",
-    co_scale_7: "Very high knowledge",
-    co_btn: "Complete Study",
+    co_q4: "I felt rushed or under time pressure while searching for the weather forecast.",
+    co_scale_1: "Strongly disagree",
+    co_scale_7: "Strongly agree",
+    co_btn: "Continue",
 
     rs_title: "Thank You!",
-    rs_text: "The survey is complete. Your data has been successfully saved. Thank you for participating in this research project!"
+    rs_text: "The survey is complete. Your data has been successfully saved. Thank you for participating in this research project!",
+
+    // UI & Browser Banner Strings
+    bb_today: "Today",
+    bb_14days: "14-Day",
+    bb_radar: "Rain Radar",
+    bb_pollen: "Pollen Count",
+    bb_live: "Live Report",
+    bb_location: "Berlin, Germany",
+    bb_forecast: "Forecast for Tomorrow",
+    bb_precip: "Precipitation",
+    bb_wind: "Wind",
+    bb_humidity: "Humidity",
+    a11y_menu: "Accessibility",
+    a11y_font: "Enlarge Text (A+)",
+    a11y_contrast: "High Contrast"
   }
 };

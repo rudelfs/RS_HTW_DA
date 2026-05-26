@@ -1,3 +1,5 @@
+// src/components/CookieScenario.jsx
+
 import { useState, useEffect } from 'react';
 import BrowserWindow from './BrowserWindow';
 
@@ -64,7 +66,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   return (
     <BrowserWindow url={displayUrl}>
       <div className="font-sans relative bg-slate-50 min-h-[800px] overflow-hidden text-left" onClick={(e) => {
-        // Fallback catch für ungerichtete Klicks im Hintergrund
         if (showBanner && e.target === e.currentTarget) {
            onTrackClick('CookieBg_EmptySpace');
         }
@@ -75,14 +76,14 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
             <span className="text-3xl">🌤️</span>
             <div>
               <h1 className="text-xl md:text-2xl font-black leading-none max-w-[200px] md:max-w-none truncate">{displayName}</h1>
-              <span className="text-[10px] text-blue-300 uppercase tracking-widest">Live Report</span>
+              <span className="text-[10px] text-blue-300 uppercase tracking-widest">{t.bb_live}</span>
             </div>
           </div>
           <div className="hidden md:flex gap-6 text-sm font-bold text-slate-300">
-            <span className="text-white border-b-2 border-blue-400 pb-1">Heute</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_14Tage')}>14-Tage</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Regenradar')}>Regenradar</span>
-            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Pollenflug')}>Pollenflug</span>
+            <span className="text-white border-b-2 border-blue-400 pb-1">{t.bb_today}</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_14Tage')}>{t.bb_14days}</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Regenradar')}>{t.bb_radar}</span>
+            <span className="hover:text-white cursor-pointer" onClick={() => onTrackClick('BannerBg_Tab_Pollenflug')}>{t.bb_pollen}</span>
           </div>
         </header>
 
@@ -91,8 +92,8 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
           <div className="md:col-span-2 space-y-6">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 pb-12">
-                <h2 className="text-2xl font-bold mb-1">Berlin, Deutschland</h2>
-                <p className="text-blue-200 text-sm">Vorhersage für Morgen</p>
+                <h2 className="text-2xl font-bold mb-1">{t.bb_location}</h2>
+                <p className="text-blue-200 text-sm">{t.bb_forecast}</p>
                 <div className="mt-8 flex items-center justify-between">
                   <div className="flex items-center gap-5">
                     <span className="text-6xl drop-shadow-lg">🌧️</span>
@@ -104,16 +105,16 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
                 </div>
               </div>
               <div className="bg-white p-6 grid grid-cols-3 gap-4 text-center divide-x divide-slate-100">
-                <div><div className="text-slate-400 text-xs uppercase font-bold">Niederschlag</div><div className="font-bold text-lg text-slate-800">95%</div></div>
-                <div><div className="text-slate-400 text-xs uppercase font-bold">Wind</div><div className="font-bold text-lg text-slate-800">24 km/h</div></div>
-                <div><div className="text-slate-400 text-xs uppercase font-bold">Luftfeuchte</div><div className="font-bold text-lg text-slate-800">82%</div></div>
+                <div><div className="text-slate-400 text-xs uppercase font-bold">{t.bb_precip}</div><div className="font-bold text-lg text-slate-800">95%</div></div>
+                <div><div className="text-slate-400 text-xs uppercase font-bold">{t.bb_wind}</div><div className="font-bold text-lg text-slate-800">24 km/h</div></div>
+                <div><div className="text-slate-400 text-xs uppercase font-bold">{t.bb_humidity}</div><div className="font-bold text-lg text-slate-800">82%</div></div>
               </div>
             </div>
           </div>
 
           <div className="space-y-6 hidden md:block">
             <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-              <h3 className="font-bold text-slate-700 text-sm mb-4 uppercase tracking-wider">{t.wr_trend_title || "7-Tage-Trend"}</h3>
+              <h3 className="font-bold text-slate-700 text-sm mb-4 uppercase tracking-wider">{t.wr_trend_title}</h3>
               <div className="space-y-3">
                 {trendDays.map((item, index) => (
                   <div key={index} className="flex justify-between items-center text-sm border-b border-slate-100 pb-2 last:border-0 last:pb-0">
