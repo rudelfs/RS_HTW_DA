@@ -151,7 +151,7 @@ export const translations = {
     ws_btn: "Begin",
     
     ts_title: "Your Task",
-    ts_text: "Imagine you are in a hurry. You need to know immediately whether you need an umbrella today. Please find out what the temperature will be today on the following page as quickly as possible.",
+    ts_text: "Imagine you are in a hurry. You need to know immediately whether you need an umbrella today. Please find out what the weather will be like today as quickly as possible.",
     ts_btn: "Start",
 
     se_search: "Weather today Berlin",
@@ -170,7 +170,7 @@ export const translations = {
     se_res4_desc: "Hourly weather forecast, probability of precipitation, and wind speeds.",
 
     cs_modal_title: "Your privacy is important to us",
-    cs_modal_text: "We and our partners store and/or access information on a device, such as unique identifiers in cookies, to process personal data.",
+    cs_modal_text: "We and our partners store and/or access information on your device, using unique identifiers in cookies to process personal data.",
     cs_btn_accept: "Accept",
     cs_btn_settings: "Options",
     cs_btn_deny: "Reject",
@@ -214,7 +214,7 @@ export const translations = {
     re_btn: "Continue",
 
     ma_reveal_title: "Disclosure",
-    ma_reveal_A: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, this banner used a specific design in which one button was highlighted in color, while the other options were shaded gray. Such design strategies are referred to in research as 'Dark Patterns'. These are user interfaces designed to subtly influence users in their decision-making.",
+    ma_reveal_A: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, this banner used a specific design in which one button was highlighted in color, while the other options were shaded gray. Such design strategies are referred to in research as 'Dark Patterns'. These are user interfaces designed to subtly manipulate users in their decision-making.",
     ma_reveal_B: "At the beginning of this study, you closed a cookie banner. As shown in the illustration, all buttons in this banner were styled in identical shades of gray to avoid steering you visually in a specific direction. Designs that intentionally manipulate users are called 'Dark Patterns'. In the version you saw, such elements were deliberately omitted.",
     ma_source: "Source: Mathur, A., et al. (2019). Dark Patterns at Scale.",
     ma_reveal_btn: "Continue to evaluation",

@@ -25,6 +25,11 @@ export default function App() {
 
   const t = translations[lang];
 
+  // Automatisches Scrollen nach oben bei jedem Schrittwechsel
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
   useEffect(() => {
     setGroup(Math.random() < 0.70 ? 'A' : 'B');
   }, []);
