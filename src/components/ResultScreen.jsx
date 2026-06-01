@@ -52,8 +52,8 @@ export default function ResultScreen({ t, results, disablePush }) {
             <p className="text-slate-600 text-sm mb-4">
               {t.rs_contact_text}
             </p>
-            <a href="mailto:deine.email@student.htw-berlin.de" className="font-bold text-blue-600 hover:underline">
-              deine.email@student.htw-berlin.de
+            <a href="mailto:rudolfs.spridis@student.htw-berlin.de" className="font-bold text-blue-600 hover:underline">
+              rudolfs.spridis@student.htw-berlin.de
             </a>
           </div>
           
