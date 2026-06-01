@@ -1,5 +1,3 @@
-// src/components/CookieScenario.jsx
-
 import { useState, useEffect } from 'react';
 import BrowserWindow from './BrowserWindow';
 
@@ -9,10 +7,7 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   const [showSettings, setShowSettings] = useState(false);
   
   const [cookieOptions, setCookieOptions] = useState({
-    essential: true,
-    analytics: false,
-    marketing: false,
-    social: false
+    essential: true, analytics: false, marketing: false, social: false
   });
 
   const displayName = siteName || t.cs_site_title || "wetter-schnell.de";
@@ -27,10 +22,11 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   ];
 
   useEffect(() => {
+    // Banner lädt sofort (10ms) damit die User die Seite vorher nicht lesen können
     const timer = setTimeout(() => {
       setShowBanner(true);
       setBannerShowTime(performance.now());
-    }, 500);
+    }, 10);
     return () => clearTimeout(timer);
   }, []);
 
@@ -87,7 +83,8 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
           </div>
         </header>
 
-        <main className={`p-4 md:p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-0 transition-all duration-300 ${showBanner ? 'blur-md pointer-events-none opacity-80' : ''}`}>
+        {/* Starker Blur (blur-2xl) und Opazität (opacity-30) wenn Banner aktiv ist */}
+        <main className={`p-4 md:p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-0 transition-all duration-300 ${showBanner ? 'blur-2xl pointer-events-none opacity-30' : ''}`}>
           
           <div className="md:col-span-2 space-y-6">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -98,8 +95,13 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
                   <div className="flex items-center gap-5">
                     <span className="text-6xl drop-shadow-lg">🌧️</span>
                     <div>
-                      <div className="text-5xl font-medium tracking-tighter">{t.wr_weather_data || "15°C"}</div>
-                      <div className="text-lg font-medium mt-1 text-blue-100">{t.wr_weather_desc || "Starker Regen"}</div>
+                      {/* Platzhalter: Wetter ist ausgeblendet solange Banner da ist */}
+                      <div className="text-5xl font-medium tracking-tighter">
+                        {showBanner ? <span className="animate-pulse bg-blue-800 text-transparent rounded">--°C</span> : (t.wr_weather_data || "15°C")}
+                      </div>
+                      <div className="text-lg font-medium mt-1 text-blue-100">
+                        {showBanner ? <span className="animate-pulse bg-blue-800 text-transparent rounded">Wird geladen...</span> : (t.wr_weather_desc || "Starker Regen")}
+                      </div>
                     </div>
                   </div>
                 </div>

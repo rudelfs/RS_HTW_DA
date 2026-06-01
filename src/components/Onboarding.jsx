@@ -2,17 +2,17 @@ import { useState } from 'react';
 
 export default function Onboarding({ t, onNext }) {
   const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [edu, setEdu] = useState('');
+  const [occ, setOcc] = useState('');
   const [tech, setTech] = useState(3);
   const [error, setError] = useState(false);
 
   const handleSubmit = () => {
-    if (!age || isNaN(age) || age < 10 || age > 100 || !gender || !edu) {
+    // Altersbegrenzung 10 bis 110
+    if (!age || isNaN(age) || age < 10 || age > 110 || !occ) {
       setError(true);
       return;
     }
-    onNext({ age: parseInt(age), gender, education: edu, techSkill: tech });
+    onNext({ age: parseInt(age), occupation: occ, techSkill: tech });
   };
 
   return (
@@ -34,23 +34,11 @@ export default function Onboarding({ t, onNext }) {
         </div>
 
         <div className="bg-slate-50 p-6 border-2 border-slate-200">
-          <label className="block font-bold mb-4 text-lg text-charcoal">{t.ob_gender}</label>
+          <label className="block font-bold mb-4 text-lg text-charcoal">{t.ob_occ}</label>
           <div className="flex flex-col gap-3">
-            {t.ob_gender_opts.map((opt, i) => (
-              <label key={opt} htmlFor={`gender-opt-${i}`} className="flex items-center gap-3 cursor-pointer">
-                <input id={`gender-opt-${i}`} type="radio" name="gender" value={opt} checked={gender === opt} onChange={(e) => setGender(e.target.value)} className="w-5 h-5 accent-jade" />
-                <span className="font-bold text-charcoal">{opt}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-slate-50 p-6 border-2 border-slate-200">
-          <label className="block font-bold mb-4 text-lg text-charcoal">{t.ob_edu}</label>
-          <div className="flex flex-col gap-3">
-            {t.ob_edu_opts.map((opt, i) => (
-              <label key={opt} htmlFor={`edu-opt-${i}`} className="flex items-center gap-3 cursor-pointer">
-                <input id={`edu-opt-${i}`} type="radio" name="edu" value={opt} checked={edu === opt} onChange={(e) => setEdu(e.target.value)} className="w-5 h-5 accent-jade" />
+            {t.ob_occ_opts.map((opt, i) => (
+              <label key={opt} htmlFor={`occ-opt-${i}`} className="flex items-center gap-3 cursor-pointer">
+                <input id={`occ-opt-${i}`} type="radio" name="occ" value={opt} checked={occ === opt} onChange={(e) => setOcc(e.target.value)} className="w-5 h-5 accent-jade" />
                 <span className="font-bold text-charcoal">{opt}</span>
               </label>
             ))}
@@ -69,7 +57,7 @@ export default function Onboarding({ t, onNext }) {
         </div>
       </div>
 
-      {error && <p className="text-red-500 font-bold mt-4">Bitte füllen Sie alle Felder korrekt aus.</p>}
+      {error && <p className="text-red-500 font-bold mt-4">{t.ob_age_err}</p>}
 
       <button 
         onClick={handleSubmit} 

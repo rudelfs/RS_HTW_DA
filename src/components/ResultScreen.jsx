@@ -6,7 +6,6 @@ export default function ResultScreen({ t, results, disablePush }) {
 
   useEffect(() => {
     const sendDataToSupabase = async () => {
-      
       if (disablePush) {
         console.warn("DEBUG MODE: Data NOT sent to Supabase.", results);
         setTimeout(() => setStatus('success'), 800);
@@ -44,9 +43,19 @@ export default function ResultScreen({ t, results, disablePush }) {
         {status === 'success' && (
           <>
             <h2 className="text-3xl font-black mb-4 uppercase tracking-tighter text-jade">{t.rs_title}</h2>
-            <p className="text-slate-600 font-bold text-lg">
+            <p className="text-slate-600 font-bold text-lg mb-8">
               {t.rs_text}
             </p>
+
+            <div className="mt-8 pt-8 border-t-2 border-slate-100 text-left bg-slate-50 p-6">
+              <p className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-2">Ergebnisse der Studie</p>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Falls Sie Interesse an den finalen Ergebnissen dieser Forschungsarbeit haben, kontaktieren Sie mich gerne unter:<br/>
+                <a href="mailto:rudolfs.spridis@student.htw-berlin.de" className="text-blue-600 font-bold hover:underline mt-2 inline-block">
+                  rudolfs.spridis@student.htw-berlin.de
+                </a>
+              </p>
+            </div>
 
             {disablePush && (
               <div className="bg-gray-900 border-4 border-charcoal p-4 rounded-lg text-left mt-8">
