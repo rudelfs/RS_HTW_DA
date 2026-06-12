@@ -11,6 +11,7 @@ import RecallSurvey from './components/RecallSurvey';
 import MacroSurvey from './components/MacroSurvey';
 import ControlSurvey from './components/ControlSurvey';
 import ResultScreen from './components/ResultScreen';
+import FinishedScreen from './components/FinishedScreen'; // <-- Neu importiert
 
 export default function App() {
   const [step, setStep] = useState(0); 
@@ -22,12 +23,15 @@ export default function App() {
   const [debugClicks, setDebugClicks] = useState(0);
   const [showDebug, setShowDebug] = useState(false);
   const [disableSupabase, setDisableSupabase] = useState(false);
+  const [bypassFinished, setBypassFinished] = useState(false); // <-- Neuer State für den Bypass
 
   const t = translations[lang];
 
-  // Automatisches Scrollen nach oben bei jedem Schrittwechsel
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
+    return () => clearTimeout(timer);
   }, [step]);
 
   useEffect(() => {
@@ -74,6 +78,7 @@ export default function App() {
       setStudyStartTime(null);
       setDebugClicks(0);
       setShowDebug(false);
+      setBypassFinished(false);
     }
   };
 
@@ -113,6 +118,15 @@ export default function App() {
             />
             <span className={disableSupabase ? 'text-red-400 font-bold' : 'text-slate-400'}>Disable DB Push</span>
           </label>
+          <label className="flex items-center gap-3 cursor-pointer mt-3">
+            <input 
+              type="checkbox" 
+              checked={bypassFinished} 
+              onChange={(e) => setBypassFinished(e.target.checked)}
+              className="w-4 h-4 accent-red-600"
+            />
+            <span className={bypassFinished ? 'text-red-400 font-bold' : 'text-slate-400'}>Bypass Finished Screen</span>
+          </label>
         </div>
       )}
 
@@ -130,19 +144,25 @@ export default function App() {
       </header>
 
       <main className="max-w-[1400px] mx-auto py-6 md:py-10 px-4">
-        {step === 0 && <WelcomeScreen t={t} onNext={() => setStep(1)} />}
-        {step === 1 && <TaskSetting t={t} onNext={() => setStep(2)} />}
-        {step === 2 && <SearchEngine t={t} onTrackClick={trackNonFunctionalClick} onNext={(d) => updateData('serpClick', d)} />}
-        
-        {step === 3 && <CookieScenario group={group} t={t} siteName={sessionData.serpClick?.siteName} siteUrl={sessionData.serpClick?.siteUrl} onTrackClick={trackNonFunctionalClick} onComplete={(d) => updateData('cookieInteraction', { ...d, group })} />}
-        {step === 4 && <WeatherResult t={t} siteName={sessionData.serpClick?.siteName} onTrackClick={trackNonFunctionalClick} onComplete={(d) => updateData('attentionCheck', d)} />}
-        {step === 5 && <MicroSurvey t={t} onComplete={(d) => updateData('microSurvey', d)} />}
-        {step === 6 && <RecallSurvey t={t} onComplete={(d) => updateData('recallSurvey', d)} />}
-        {step === 7 && <MacroSurvey group={group} t={t} onComplete={(d) => updateData('macroSurvey', d)} />}
-        {step === 8 && <ControlSurvey t={t} onComplete={(d) => updateData('controlSurvey', d)} />}
-        
-        {step === 9 && <Onboarding t={t} onNext={handleFinalStep} />}
-        {step === 10 && <ResultScreen t={t} results={sessionData} disablePush={disableSupabase} />}
+        {!bypassFinished ? (
+          <FinishedScreen t={t} />
+        ) : (
+          <>
+            {step === 0 && <WelcomeScreen t={t} onNext={() => setStep(1)} />}
+            {step === 1 && <TaskSetting t={t} onNext={() => setStep(2)} />}
+            {step === 2 && <SearchEngine t={t} onTrackClick={trackNonFunctionalClick} onNext={(d) => updateData('serpClick', d)} />}
+            
+            {step === 3 && <CookieScenario group={group} t={t} siteName={sessionData.serpClick?.siteName} siteUrl={sessionData.serpClick?.siteUrl} onTrackClick={trackNonFunctionalClick} onComplete={(d) => updateData('cookieInteraction', { ...d, group })} />}
+            {step === 4 && <WeatherResult t={t} siteName={sessionData.serpClick?.siteName} onTrackClick={trackNonFunctionalClick} onComplete={(d) => updateData('attentionCheck', d)} />}
+            {step === 5 && <MicroSurvey t={t} onComplete={(d) => updateData('microSurvey', d)} />}
+            {step === 6 && <RecallSurvey t={t} onComplete={(d) => updateData('recallSurvey', d)} />}
+            {step === 7 && <MacroSurvey group={group} t={t} onComplete={(d) => updateData('macroSurvey', d)} />}
+            {step === 8 && <ControlSurvey t={t} onComplete={(d) => updateData('controlSurvey', d)} />}
+            
+            {step === 9 && <Onboarding t={t} onNext={handleFinalStep} />}
+            {step === 10 && <ResultScreen t={t} results={sessionData} disablePush={disableSupabase} />}
+          </>
+        )}
       </main>
     </div>
   );

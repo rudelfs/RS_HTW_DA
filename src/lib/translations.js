@@ -131,9 +131,17 @@ export const translations = {
     bb_forecast: "Vorhersage für Heute",
     bb_precip: "Niederschlag",
     bb_wind: "Wind",
+    fs_title: "Die Umfrage ist beendet",
+    fs_text: "Danke an alle, die teilgenommen haben!",
+    fs_contact: "Wenn Sie Interesse an den Ergebnissen haben, kontaktieren Sie mich bitte hier:",
     bb_humidity: "Luftfeuchte"
+
+    
   },
   en: {
+    fs_title: "The survey is closed",
+    fs_text: "Thank you to everyone who participated!",
+    fs_contact: "If you are interested in the results, please contact me here:",
     ob_title: "Demographics",
     ob_text: "Finally, we would like to ask you for some statistical information.",
     ob_age: "Your Age:",
