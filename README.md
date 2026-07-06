@@ -19,6 +19,11 @@ Deployment
 Build und Push in den gh-pages Branch:
 `npm run deploy`
 
+Ebenfalls befindet sich in diesem Repo die Datei "auswertung_graphen.py" was die Auswertungsdatei ist, um die 
+generierten .json Datensätze als eine CSV auszuwerten und die für die Arbeit benötigten Graphen zu erstellen.
+
+Bei dem erstellen des Survey Tools sowie der Auswertungsanwendung wurde Claude zur Unterstützung verwendet.
+
 Autor
 Rudolfs Spridis  
 rudolfs.spridis@student.htw-berlin.de
