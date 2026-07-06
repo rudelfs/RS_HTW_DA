@@ -1,4 +1,3 @@
-// src/components/WelcomeScreen.jsx
 
 export default function WelcomeScreen({ t, onNext }) {
   return (

@@ -5,13 +5,11 @@ export default function InfoModal({ isOpen, onClose, debugMode, setDebugMode }) 
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal/40 backdrop-blur-sm">
       <div className="bg-white border-4 border-charcoal p-8 max-w-md w-full shadow-[8px_8px_0px_0px_rgba(77,80,87,1)] animate-window-pop">
         
-        {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <h2 className="text-3xl font-black uppercase tracking-tighter italic">Cookienator 9000</h2>
           <button onClick={onClose} className="text-2xl font-black hover:text-jade">✕</button>
         </div>
 
-        {/* Info Text */}
         <div className="space-y-4 mb-8 text-sm border-l-4 border-jade pl-4 py-2">
           <p className="font-bold">Erstellt von Rudolfs Spridis</p>
           <p>Im Rahmen seiner Bachelorarbeit im SoSe 2026</p>
@@ -20,7 +18,6 @@ export default function InfoModal({ isOpen, onClose, debugMode, setDebugMode }) 
           </p>
         </div>
 
-        {/* Debug Option */}
         <div className="bg-dust border-2 border-charcoal p-4 mb-6">
           <label className="flex items-center gap-3 cursor-pointer select-none">
             <div className="relative">
@@ -38,7 +35,6 @@ export default function InfoModal({ isOpen, onClose, debugMode, setDebugMode }) 
           </label>
         </div>
 
-        {/* Footer Button */}
         <button 
           onClick={onClose}
           className="w-full bg-charcoal text-white p-3 font-bold uppercase hover:bg-jade transition-colors shadow-[4px_4px_0px_0px_rgba(207,207,207,1)] active:translate-y-1 active:shadow-none"

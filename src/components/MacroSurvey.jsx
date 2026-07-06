@@ -29,7 +29,6 @@ export default function MacroSurvey({ group, t, onComplete }) {
           {group === 'A' ? t.ma_reveal_A : t.ma_reveal_B}
         </p>
         
-        {/* Quellenangabe */}
         <p className="text-xs text-slate-400 italic mb-8">
           {t.ma_source}
         </p>

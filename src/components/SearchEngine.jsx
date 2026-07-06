@@ -5,7 +5,6 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
 
   return (
     <div className="bg-white min-h-screen font-sans text-left pb-20 animate-window-pop">
-      {/* Header */}
       <header className="flex flex-wrap items-center p-4 md:p-6 md:pl-8 border-b border-slate-200 gap-4 md:gap-8">
         <div className="text-2xl font-black text-blue-600 tracking-tighter">SearchMock</div>
         <div className="flex-1 max-w-2xl flex items-center border border-slate-300 rounded-full px-5 py-3 shadow-sm hover:shadow-md transition-shadow">
@@ -14,7 +13,6 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
         </div>
       </header>
 
-      {/* Navigation */}
       <div className="border-b border-slate-200 px-4 md:px-8 lg:px-40 flex gap-6 text-sm text-slate-600 overflow-x-auto">
         <div className="border-b-4 border-blue-600 pb-3 pt-3 text-blue-600 font-bold whitespace-nowrap">{t.se_nav_all}</div>
         <div className="pb-3 pt-3 hover:text-slate-800 cursor-pointer whitespace-nowrap">{t.se_nav_images}</div>
@@ -22,11 +20,9 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
         <div className="pb-3 pt-3 hover:text-slate-800 cursor-pointer whitespace-nowrap">{t.se_nav_maps}</div>
       </div>
 
-      {/* Results */}
       <main className="p-4 md:p-8 lg:px-40 max-w-4xl">
         <div className="text-sm text-slate-500 mb-6">{t.se_results_count}</div>
 
-        {/* Result 1 */}
         <div 
           className="mb-8 cursor-pointer group" 
           onClick={() => onNext({ siteName: t.se_res1_title, siteUrl: 'wetter-schnell.de' })}
@@ -39,7 +35,6 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
           <p className="text-slate-600 text-sm">{t.se_res1_desc}</p>
         </div>
 
-        {/* Result 2 */}
         <div 
           className="mb-8 cursor-pointer group"
           onClick={() => onNext({ siteName: t.se_res2_title, siteUrl: 'wetter24.de' })}
@@ -52,7 +47,6 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
           <p className="text-slate-600 text-sm">{t.se_res2_desc}</p>
         </div>
 
-        {/* Result 3 */}
         <div 
           className="mb-8 cursor-pointer group"
           onClick={() => onNext({ siteName: t.se_res3_title, siteUrl: 'live-radar.net' })}
@@ -65,7 +59,6 @@ export default function SearchEngine({ t, onTrackClick, onNext }) {
           <p className="text-slate-600 text-sm">{t.se_res3_desc}</p>
         </div>
 
-        {/* Result 4 */}
         <div 
           className="mb-8 cursor-pointer group"
           onClick={() => onNext({ siteName: t.se_res4_title, siteUrl: 'wetter-heute.de' })}

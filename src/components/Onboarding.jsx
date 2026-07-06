@@ -7,7 +7,6 @@ export default function Onboarding({ t, onNext }) {
   const [error, setError] = useState(false);
 
   const handleSubmit = () => {
-    // Altersbegrenzung 10 bis 110
     if (!age || isNaN(age) || age < 10 || age > 110 || !occ) {
       setError(true);
       return;

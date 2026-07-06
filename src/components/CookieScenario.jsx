@@ -22,7 +22,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
   ];
 
   useEffect(() => {
-    // Banner lädt sofort (10ms) damit die User die Seite vorher nicht lesen können
     const timer = setTimeout(() => {
       setShowBanner(true);
       setBannerShowTime(performance.now());
@@ -83,7 +82,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
           </div>
         </header>
 
-        {/* Starker Blur (blur-2xl) und Opazität (opacity-30) wenn Banner aktiv ist */}
         <main className={`p-4 md:p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 relative z-0 transition-all duration-300 ${showBanner ? 'blur-2xl pointer-events-none opacity-30' : ''}`}>
           
           <div className="md:col-span-2 space-y-6">
@@ -95,7 +93,6 @@ export default function CookieScenario({ group, t, siteName, siteUrl, onTrackCli
                   <div className="flex items-center gap-5">
                     <span className="text-6xl drop-shadow-lg">🌧️</span>
                     <div>
-                      {/* Platzhalter: Wetter ist ausgeblendet solange Banner da ist */}
                       <div className="text-5xl font-medium tracking-tighter">
                         {showBanner ? <span className="animate-pulse bg-blue-800 text-transparent rounded">--°C</span> : (t.wr_weather_data || "15°C")}
                       </div>
